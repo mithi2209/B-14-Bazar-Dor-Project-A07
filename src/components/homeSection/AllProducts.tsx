@@ -2,7 +2,7 @@
 
 const AllProducts = () => {
     return (
-        <div>
+        <div id="all-products">
             
         </div>
     );

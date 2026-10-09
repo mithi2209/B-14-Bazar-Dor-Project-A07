@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NotFoundPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-16 bg-gradient-to-b from-white to-gray-50">
+    <div className="bg-[#F0F5EF] min-h-screen flex items-center justify-center px-4 py-16 ">
       <div className="max-w-lg w-full text-center">
         {/* Illustration / Emoji */}
         <div className="relative inline-block mb-8">

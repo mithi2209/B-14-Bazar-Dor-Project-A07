@@ -4,9 +4,11 @@ import { Hind_Siliguri } from "next/font/google";
 import { ToastContainer} from 'react-toastify';
 import Navbar from '../components/sharedLayout/Navbar';
 import Footer from '../components/sharedLayout/Footer';
+import { Suspense } from "react";
+import GlobalLoading from "./loading";
 
 const hindSiliguri = Hind_Siliguri({
-  variable: "--font-hind-siliguri",
+  
   weight: ["400", "500", "600", "700"],
   subsets: ["latin" , "bengali"],
 });
@@ -23,17 +25,25 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-theme="light"
-      className={`${hindSiliguri.variable}h-full antialiased`}
+      className={`${hindSiliguri.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-          <Navbar />
+   
+    <body className="min-h-full flex flex-col">
+      
+      <Suspense fallback={<GlobalLoading></GlobalLoading>}>
+        <main >
+            <Navbar />
 
-          {children}
+            {children}
 
-          <Footer />
-          
+            <Footer />
+        </main>
+      </Suspense>
+   
+
       <ToastContainer />
-      </body>
+    </body>
+   
     </html>
   );
 }

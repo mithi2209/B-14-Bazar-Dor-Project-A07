@@ -2,12 +2,3 @@
 @import "@heroui/styles"; 
 @plugin "daisyui";
 
-@theme {
-  
-    /* Bg Color */
-  --color-background: #F0F5EF;
-}
-
-body {
-  background-color: var(--color-background);
-}
