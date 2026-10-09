@@ -1,7 +1,9 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import { ToastContainer} from 'react-toastify';
-import "./globals.css";
+import Navbar from '../components/sharedLayout/Navbar';
+import Footer from '../components/sharedLayout/Footer';
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind-siliguri",
@@ -24,7 +26,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${hindSiliguri.variable}h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {children}
+          <Navbar />
+
+          {children}
+
+          <Footer />
+          
       <ToastContainer />
       </body>
     </html>
