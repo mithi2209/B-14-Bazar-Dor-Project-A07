@@ -34,7 +34,7 @@ const NotFoundPage = () => {
           </Link>
 
           <Link
-            href="/products"
+            href="/"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all"
           >
             <span>📦</span>

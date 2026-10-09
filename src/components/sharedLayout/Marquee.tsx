@@ -22,7 +22,7 @@ const MarqueePage = async () => {
   const data: IHeadline[] = await res.json();
 
   return (
-    <div className="border-t border-[#F0F5EF]">
+    <div className="border-t border-[#F0F5EF] border-b-2  ">
       <MarqueeText duration={20} direction="right">
         {data.slice(0, 10).map((headlines) => {
           const pct = headlines.change.pct;

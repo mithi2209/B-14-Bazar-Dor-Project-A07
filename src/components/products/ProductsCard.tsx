@@ -17,12 +17,12 @@ const ProductsCard = ({ product }: ProductCardProps) => {
     dir === "down"
       ? "bg-[#f5f0f5] text-green-700"
       : dir === "up"
-        ? "bg-red-50 text-red-600"
-        : "bg-gray-100 text-gray-600";
+      ? "bg-red-50 text-red-600"
+      : "bg-gray-100 text-gray-600";
 
   return (
-    <Link href={`/products/${product.id}`}>
-      <div className="card w-full bg-white rounded-[2rem] shadow-md border border-gray-100 py-8 px-6 ">
+    <Link href={`/product/${product.id}`}>
+      <div className="card w-full bg-white rounded-[2rem] shadow-md border-2 border-gray-200 py-8 px-6  hover:border-green-600">
         {/* Header: Icon and Title */}
         <div className="flex items-center gap-4 mb-5">
           {/* Icon Box */}

@@ -1,12 +1,12 @@
 
 import { IProductDataProps } from "@/app/types/product";
 import ProductsCard from "../products/ProductsCard";
+import AllProductsDataFetch from "@/lib/page";
 
 
-const AllProducts = async() => {
-    const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
-
-    const productData: IProductDataProps[] = await res.json();
+const AllProducts = async () => {
+    
+    const productData: IProductDataProps[] = await AllProductsDataFetch()
 
     return (
         <div className=" container mx-auto" id="all-products">
