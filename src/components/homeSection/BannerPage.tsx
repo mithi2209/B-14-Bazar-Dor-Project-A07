@@ -5,16 +5,15 @@ import heroImg from "@/images/bazar-hero.png"
 
 
 const BannerPage = () => {
-
-      const date = new Date().toLocaleDateString("bn-BD", {
+        const date = new Date().toLocaleDateString("bn-BD", {
         dateStyle: "full",
     });
 
-
     return (
-        <div className=" container mx-auto my-14 px-4 md:px-5 lg:px-0 ">
+       <section className="px-4 md:px-5 lg:px-0 container mx-auto py-14 ">
+             <div className="bg-white rounded-4xl shadow-lg border border-[#F0F5EF] px-6 py-6 lg:py-5 lg:px-10 ">
 
-            <div className=" bg-white rounded-4xl shadow-lg  px-6 py-6 lg:py-10 lg:px-10 flex  flex-col-reverse items-center justify-between gap-6 md:flex-row border border-[#F0F5EF]">
+            <div className=" flex  flex-col-reverse items-center justify-between gap-6 lg:gap-0 md:flex-row ">
 
                 {/* Left Content */}
                 <div className="w-full min-w-0 md:flex-1">
@@ -59,6 +58,7 @@ const BannerPage = () => {
             </div>
             
         </div>
+       </section>
     );
 };
 

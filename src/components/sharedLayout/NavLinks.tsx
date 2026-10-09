@@ -23,7 +23,7 @@ const NavLinks = async() => {
 
 
     return (
-        <div className="py-4  border-2 border-t border-[#F0F5EF] ">
+        <div className="py-4  border-t border-[#F0F5EF] ">
 
            <div className="container mx-auto px-4 md:px-5 lg:px-0 flex justify-center lg:justify-start items-center flex-wrap gap-2 md:gap-5">
 
