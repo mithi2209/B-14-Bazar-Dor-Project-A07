@@ -14,7 +14,7 @@ const AllProducts = async () => {
 
            <div className="text-center lg:text-left gap-1  ">
                 
-                <h2 className=" text-2xl lg:text-3xl font-semibold">সব পণ্য</h2>
+                <h2 className=" text-2xl lg:text-3xl font-semibold pt-10">সব পণ্য</h2>
                 <p className="text-slate-500 font-medium text-sm md:text-base lg:text-lg mt-2 lg:mt-4">মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>
             </div>
 

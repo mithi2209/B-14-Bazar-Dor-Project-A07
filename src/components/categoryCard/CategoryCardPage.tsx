@@ -56,7 +56,7 @@ const CategoryCardPage = ({ category,categoryData }:CategoryCardPageProps) => {
 
   return (
 
-    <section className="min-h-screen bg-[#eff3f0] py-4 md:py-8 lg:py-20">
+    <section className="min-h-screen bg-[#eff3f0] py-4 md:py-8 lg:py-8">
 
       <div className="px-4 md:px-5 lg:px-0 py-10 container mx-auto space-y-6 lg:space-y-10">
 
