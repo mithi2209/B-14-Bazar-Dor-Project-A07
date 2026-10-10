@@ -1,9 +1,9 @@
-import  { AllCategoriesData } from "@/lib/page";
-import CategoryCardPage from "@/components/categoryCard/CategoryCardPage";
-import { IProductData } from "@/app/types/product";
+
+
 import { notFound } from "next/navigation";
-import ProductByCategory from './page';
+import  { AllCategoriesData } from "@/lib/page";
 import { ProductsByCategoryFetch } from '../../../lib/page';
+import CategoryCardPage from "@/components/categoryCard/CategoryCardPage";
 
 
 // Category type
@@ -18,7 +18,7 @@ interface CategoryProps {
   params: Promise<{ slug: string }>;
 }
 
-type SortOption = "default" | "low" | "high";
+
 
 
 const CategoriesProduct = async ({ params }: CategoryProps) => {

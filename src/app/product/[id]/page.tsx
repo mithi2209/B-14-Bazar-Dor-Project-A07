@@ -1,11 +1,12 @@
 
+import { notFound } from "next/navigation";
 import AllProductsDataFetch from "@/lib/page";
 import { IProductData } from "@/app/types/product";
 import ProductDetailHeader from "@/components/product-detail/ProductDetailHeader";
 import ProductPriceSummary from "@/components/product-detail/ProductPriceSummary";
 import ProductBreadCrumb from "@/components/product-detail/ProductBreadCrumb";
 import MarketPriceTable from "@/components/product-detail/MarketPriceTable";
-import { notFound } from "next/navigation";
+
 
 interface IProductDetailDataProps {
   params: Promise<{

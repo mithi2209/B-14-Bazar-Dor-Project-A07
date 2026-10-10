@@ -1,9 +1,9 @@
 
-import Link from "next/link";
 
+import Link from "next/link";
+import { TbMinus } from "react-icons/tb";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { TbMinus } from "react-icons/tb";
 import { IProductData } from "@/app/types/product";
 import { formatBangla } from "@/lib/formatBangla";
 

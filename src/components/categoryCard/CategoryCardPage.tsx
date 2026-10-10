@@ -1,26 +1,56 @@
+"use client";
 
-
-import { IProductData } from "@/app/types/product";
+import { useState } from "react";
 import { formatBangla } from "@/lib/formatBangla";
+import { IProductData } from "@/app/types/product";
+import CategoryBreadCrumb from './CategoryBreadCrumb';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import ProductsCard from "../products/ProductsCard";
 import CategoryNotFoundPage from "@/app/category/[slug]/not-found";
 
-interface ICategory {
+
+
+export interface ICategory {
   id: string;
   slug: string;
   nameBn: string;
   icon: string;
 }
 
-interface CategoryCardPageProps {
+ interface CategoryCardPageProps {
   category: ICategory;
   categoryData: IProductData[];
 }
 
-const CategoryCardPage = ({category , categoryData }:CategoryCardPageProps) => {
+type TSortOption = "default" | "low" | "high";
+
+
+const CategoryCardPage = ({ category,categoryData }:CategoryCardPageProps) => {
+
+
+
+  // sorting........
+  const[sortOption ,setSortOption] = useState<TSortOption>("default");
+
+  const sortedProducts = [...categoryData].sort((a,b) => {
+
+    if(sortOption === "low"){
+      return a.today - b.today ;
+    }
+
+    if(sortOption === "high"){
+      return b.today - a.today ;
+    }
+
+
+     return 0 ;
+
+  });
+
+
 
   if(categoryData.length === 0){
+
     return <CategoryNotFoundPage></CategoryNotFoundPage>
   }
 
@@ -29,6 +59,8 @@ const CategoryCardPage = ({category , categoryData }:CategoryCardPageProps) => {
     <section className="min-h-screen bg-[#eff3f0] py-4 md:py-8 lg:py-20">
 
       <div className="px-4 md:px-5 lg:px-0 py-10 container mx-auto space-y-6 lg:space-y-10">
+
+        <CategoryBreadCrumb category={category}></CategoryBreadCrumb>
 
         {/* --- Header Card --- */}
         <div className="card bg-white  shadow-sm rounded-2xl p-4 md:p-6 border border-[#F0F5EF]">
@@ -63,24 +95,52 @@ const CategoryCardPage = ({category , categoryData }:CategoryCardPageProps) => {
               role="button"
               className="btn rounded-md btn-outline border-gray-300 text-gray-700 bg-white hover:bg-[#F0F5EF] hover:border-gray-400 hover:text-gray-600 gap-2 font-medium text-sm"
             >
-              ডিফল্ট
+                 {sortOption === "default"
+                  ? "ডিফল্ট "
+                  : sortOption === "low"
+                  ? "দাম: কম থেকে বেশি"
+                  : "দাম: বেশি থেকে কম"}
+
+
               <MdKeyboardArrowDown size={16} />
             </div>
+
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32"
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-32 lg:w-40 "
             >
-              <li className="text-gray-700 font-medium">
-                <a>ঢাকা</a>
+
+                <li  className="text-gray-600 font-medium ">
+                  <button
+                    
+                    onClick={() => setSortOption("default")}
+                    >
+                      ডিফল্ট
+                  </button>
               </li>
-              <li className="text-gray-700 font-medium">
-                <a>চট্টগ্রাম</a>
+
+              <li className="text-gray-600 font-medium">
+                <button 
+                  
+                  onClick ={() =>setSortOption("low")}>
+                  দাম: কম থেকে বেশি
+                </button>
               </li>
+
+              <li className="text-gray-600 font-medium">
+              <button 
+                  
+                  onClick ={() =>setSortOption("high")}>
+                  দাম: বেশি থেকে কম
+                </button>
+              </li>
+
+
             </ul>
           </div>
         </div>
 
-        {/* --- Section Title --- */}
+        {/* ---Card Section Title --- */}
         <div>
           <h2 className="text-sm md:text-lg lg:text-xl font-medium text-gray-600 mt-4 md:mt-10 lg:mt-16  ml-1">
             মোট {formatBangla(categoryData.length)}টি পণ্য ম্যানুয়াল হচ্ছে
@@ -90,7 +150,7 @@ const CategoryCardPage = ({category , categoryData }:CategoryCardPageProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  mt-6 lg:mt-10">
 
 
-                  { categoryData.map((product) => (
+                  { sortedProducts.map((product) => (
                     
                         <div key={product.id}>
                             <ProductsCard product={product} />
