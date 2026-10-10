@@ -1,7 +1,8 @@
 import { formatBangla } from "@/lib/formatBangla";
+import { IProductData } from "@/app/types/product";
 
 
-const ProductPriceSummary = ({product}) => {
+const ProductPriceSummary =(product:IProductData)=> {
 
     
   const marketNames = Array.isArray(product.markets)
@@ -28,7 +29,7 @@ const ProductPriceSummary = ({product}) => {
     return (
         <div>
 
-               {/* Summary */}
+          {/* Summary */}
           <h2 className="mb-4 text-lg lg:text-2xl font-semibold text-gray-800">
             দামের সারসংক্ষেপ
           </h2>
@@ -74,7 +75,7 @@ const ProductPriceSummary = ({product}) => {
                 <div>
                   <p className="text-sm lg:text-base text-gray-600">গড় দাম</p>
                   <h3 className="mt-1 text-xl lg:text-2xl font-bold text-green-600">
-                    {formatBangla(averagePrice)}<span className="text-base font-medium"> টাকা</span>
+                    {formatBangla(averagePrice)} <span className="text-base font-medium"> টাকা </span>
                   </h3>
                   <p className="text-sm lg:text-base text-gray-500">
                     প্রতি কেজির গড় মূল্য

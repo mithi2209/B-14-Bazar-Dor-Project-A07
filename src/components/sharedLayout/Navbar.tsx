@@ -3,17 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import NavLogo from "@/images/logo-icon.png";
-import ProfilePage from "@/app/profile/page";
 import SignInPage from "@/app/signIn/page";
 import SignUpPage from "@/app/signUp/page";
-import NavLinks from "./NavLinks";
+import NavLinks, { INavLinks } from "./NavLinks";
 import MarqueePage from "./Marquee";
 import CurrentDate from "./CurrentDate";
+import { AllCategoriesData } from "@/lib/page";
 
 
-const Navbar = () => {
+const Navbar = async() => {
 
+    const data: INavLinks[] = await AllCategoriesData();
 
+    
   return (
     <header className="">
       <nav className=" container py-5 px-4 md:px-5 lg:px-0 mx-auto flex justify-between items-center gap-3  ">
@@ -54,10 +56,10 @@ const Navbar = () => {
         
       
 
-      <NavLinks></NavLinks>
-      <MarqueePage />
+      <NavLinks data={data}></NavLinks>
+      <MarqueePage  />
     </header>
-   
+ 
 
     
   );

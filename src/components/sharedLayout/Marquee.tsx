@@ -2,6 +2,8 @@ import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
+import AllProductsDataFetch from "@/lib/page";
+import { formatBangla } from "@/lib/formatBangla";
 interface IHeadline {
   id: number;
   nameBn: string;
@@ -14,17 +16,17 @@ interface IHeadline {
   };
 }
 
-const MarqueePage = async () => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
-  );
+const MarqueePage =  async() => {
 
-  const data: IHeadline[] = await res.json();
+  const data: IHeadline[] = await AllProductsDataFetch();
 
   return (
     <div className="border-t border-[#F0F5EF] border-b-2  ">
+
       <MarqueeText duration={20} direction="right">
+
         {data.slice(0, 10).map((headlines) => {
+          
           const pct = headlines.change.pct;
 
           return (
@@ -40,7 +42,7 @@ const MarqueePage = async () => {
               </li>
               <li>
                 <span className="mr-2 text-sm lg:text-base">
-                  {headlines.today} টাকা/কেজি
+                  {formatBangla(headlines.today)} টাকা/কেজি
                 </span>
               </li>
               <li
@@ -58,18 +60,18 @@ const MarqueePage = async () => {
                     headlines.change.dir === "up" && headlines.change.pct > 0 ? (
                     <span className="flex justify-center items-center">
                         <IoMdArrowDropup className="text-xl lg:text-3xl " />
-                        {Math.abs(pct)}%
+                        {formatBangla(Math.abs(pct))}%
                     </span>
                     )
                     : headlines.change.dir === "down" &&
                     headlines.change.pct < 0 ? (
                     <span className="flex justify-center items-center">
                         <IoMdArrowDropdown className="text-xl lg:text-3xl " />
-                        {Math.abs(pct)}%
+                        {formatBangla(Math.abs(pct))}%
                     </span>
                     ) 
                     :(
-                    <span>{headlines.change.pct}%</span>
+                    <span>{formatBangla(headlines.change.pct)}%</span>
                     )
                 }
               </li>

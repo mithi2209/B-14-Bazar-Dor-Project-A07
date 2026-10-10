@@ -1,7 +1,8 @@
 import { formatBangla } from "@/lib/formatBangla";
+import { IProductData} from "@/app/types/product";
 
 
-const MarketPriceTable = ({product}) => {
+const MarketPriceTable = (product:IProductData) => {
     return (
         <div>
 
@@ -12,8 +13,8 @@ const MarketPriceTable = ({product}) => {
 
           
           <div className="overflow-x-auto rounded-2xl border-2 border-[#F0F5EF]">
-            <table className="table table-xs lg:table-md w-full">
-              <thead>
+            <table className="table table-xs lg:table-md w-full py-3 md:py-2 ">
+              <thead >
                 <tr className="text-gray-500 text-semibold text-sm lg:text-lg ">
                   <th className="whitespace-nowrap">বাজার</th>
                   <th className="whitespace-nowrap">বিভাগ</th>
@@ -26,21 +27,6 @@ const MarketPriceTable = ({product}) => {
               <tbody>
 
 
-                
-
-
-
-                {/* <tr className="hover:bg-[#f4f8f4] text-xs lg:text-sm font-medium text-gray-600">
-                  <td className="whitespace-nowrap">মাছ বাজার</td>
-                  <td className="whitespace-nowrap">সদরবাজার</td>
-                  <td className="whitespace-nowrap text-right">৫৯ টাকা</td>
-                  <td className="whitespace-nowrap text-right">৬৩ টাকা</td>
-                  <td className="whitespace-nowrap text-right">৬৫ টাকা</td>
-                </tr> */}
-
-
-
-
                 {product.markets.map((market, index) => (
                     <tr
                         key={`${market.market}-${index}`}
@@ -50,7 +36,7 @@ const MarketPriceTable = ({product}) => {
                             : "bg-white"}
                         `}
                     >
-                    <td className="p-3 whitespace-nowrap">{market.market}</td>
+                    <td className="p-3 whitespace-nowrap ">{market.market}</td>
                     <td className="p-3 whitespace-nowrap">{market.division}</td>
 
                     <td className="p-3 text-right whitespace-nowrap">

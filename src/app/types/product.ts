@@ -1,18 +1,13 @@
-export interface IMarket {
-  market: string;
-  division: string;
-  min: number;
-  max: number;
-}
-export interface IProductDataProps {
+
+export interface IProductData{
   id: number;
+  image: string;
   slug: string;
   nameBn: string;
   category: string;
   categoryNameBn: string;
   categoryIcon: string;
   unit: string;
-  image: string;
   today: number;
   yesterday: number;
   lastWeek: number;
@@ -25,4 +20,11 @@ export interface IProductDataProps {
    
 }
 
+
+export interface IMarket {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
+}
 

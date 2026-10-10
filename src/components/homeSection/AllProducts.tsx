@@ -1,15 +1,15 @@
 
-import { IProductDataProps } from "@/app/types/product";
+import { IProductData} from "@/app/types/product";
 import ProductsCard from "../products/ProductsCard";
 import AllProductsDataFetch from "@/lib/page";
 
 
 const AllProducts = async () => {
     
-    const productData: IProductDataProps[] = await AllProductsDataFetch()
+    const productData: IProductData[] = await AllProductsDataFetch()
 
     return (
-        <div className=" container mx-auto" id="all-products">
+        <div className="container mx-auto" id="all-products">
 
            <div className="text-center lg:text-left gap-1  ">
                 
@@ -18,7 +18,7 @@ const AllProducts = async () => {
             </div>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  px-4 md:px-5 lg:px-0 py-10 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  px-4 md:px-5 lg:px-0 py-10 container mx-auto">
                 {  productData.map((product) => (
                     
                         <div key={product.id}>

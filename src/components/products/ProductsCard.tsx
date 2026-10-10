@@ -1,24 +1,29 @@
-import Image from "next/image";
+
 import Link from "next/link";
 
 import { TiArrowSortedUp } from "react-icons/ti";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TbMinus } from "react-icons/tb";
-import { IProductDataProps } from "@/app/types/product";
+import { IProductData } from "@/app/types/product";
+import { formatBangla } from "@/lib/formatBangla";
 
 interface ProductCardProps {
-  product: IProductDataProps;
+  product: IProductData;
 }
 
 const ProductsCard = ({ product }: ProductCardProps) => {
+
   const { dir } = product.change;
-  // Set badge styles according to the trend direction
+
+  // Set badge styles 
   const pctStyles =
     dir === "down"
       ? "bg-[#f5f0f5] text-green-700"
       : dir === "up"
       ? "bg-red-50 text-red-600"
       : "bg-gray-100 text-gray-600";
+
+
 
   return (
     <Link href={`/product/${product.id}`}>
@@ -50,7 +55,7 @@ const ProductsCard = ({ product }: ProductCardProps) => {
           <div className="flex justify-between items-center">
             {/* Price */}
             <div className="text-[22px] lg:text-2xl font-bold text-gray-900">
-              {product.today}
+              {formatBangla(product.today)}
             </div>
 
             {/* pct Badge */}
@@ -65,7 +70,7 @@ const ProductsCard = ({ product }: ProductCardProps) => {
                 <TbMinus className="text-lg" />
               )}
 
-              <span>{product.change.pct} %</span>
+              <span>{formatBangla(product.change.pct)} %</span>
 
               {/* Upward Arrow SVG */}
               {/* <TiArrowSortedUp className="text-lg"></TiArrowSortedUp>
