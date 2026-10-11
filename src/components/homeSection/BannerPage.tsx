@@ -47,8 +47,8 @@ const BannerPage = () => {
                     <Image
                     
                         className=""
-                        width={"auto"}
-                        height={"auto"}
+                        width={400}
+                        height={400}
                         src={heroImg}
                         alt="banner image">
 

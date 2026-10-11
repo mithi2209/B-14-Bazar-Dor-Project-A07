@@ -41,7 +41,7 @@ const MarqueePage =  async() => {
             
               <ul className=" flex items-center mx-2 border-r-2 border-[#F0F5EF] py-2">
                 <li>
-                  {headlines.image}
+                  {headlines.categoryIcon}
                   <span className="mx-2 font-semibold text-sm lg:text-base">
                     {headlines.nameBn}
                   </span>

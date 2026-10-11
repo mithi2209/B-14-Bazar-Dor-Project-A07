@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { formatBangla } from "@/lib/formatBangla";
 import { IProductData } from "@/app/types/product";
-import CategoryBreadCrumb from './CategoryBreadCrumb';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import ProductsCard from "../products/ProductsCard";
 import CategoryNotFoundPage from "@/app/category/[slug]/not-found";
+import CategoryBreadCrumb from './CategoryBreadCrumb';
 
 
 
