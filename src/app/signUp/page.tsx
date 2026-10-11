@@ -24,7 +24,7 @@ const SignUpPage = () => {
 
         const{ data ,error } = await authClient.signUp.email({
             ...userData,
-            callbackURl : "/"
+            callbackURL : "/"
         })
         
         if(data){

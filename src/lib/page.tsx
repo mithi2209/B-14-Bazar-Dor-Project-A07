@@ -1,4 +1,4 @@
-import CategoryNotFoundPage from "@/app/category/[slug]/not-found";
+
 import { IProductData } from "@/app/types/product";
 
 
@@ -9,7 +9,7 @@ const AllProductsDataFetch = async() => {
         const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
 
        
-        const data = await res.json();
+        const data = await res.json() ;
         return(data);
      }
      catch (error) {

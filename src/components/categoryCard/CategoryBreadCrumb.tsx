@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ICategory } from './CategoryCardPage';
 import { FaChevronRight } from "react-icons/fa";
-import { formatBanglaWords } from "../../lib/formatBanglaWords.ts"
+import { formatBanglaWords } from "../../lib/formatBanglaWords"
 
 
 
