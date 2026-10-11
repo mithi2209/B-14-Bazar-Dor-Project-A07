@@ -1,18 +1,22 @@
+
 "use client";
 
 import Link from "next/link";
-import { MdOutlineArrowDropDown } from "react-icons/md";
-import { BsArrowReturnLeft } from "react-icons/bs";
-import { BsPersonFill } from "react-icons/bs";
 import Image from "next/image";
 import userImg from "@/images/Avatar.png";
-import { authClient } from "@/lib/auth-client";
-import UserRegisterBtn from "@/components/sharedLayout/userRegisterBtn/UserRegisterBtn";
+import { BsPersonFill } from "react-icons/bs";
+import { BsArrowReturnLeft } from "react-icons/bs";
+import { MdOutlineArrowDropDown } from "react-icons/md";
+import { authClient } from '@/lib/auth-client';
+import UserRegisterBtn from '@/components/sharedLayout/userRegisterBtn/UserRegisterBtn';
+
 
 const ProfilePage = () => {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
 
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
+
+    // sign out
   const handleSignOut = async() =>{
 
     await authClient.signOut();
@@ -64,7 +68,7 @@ const ProfilePage = () => {
 
               <li>
                 <Link
-                  href="/profile"
+                  href="/updateProfilePage"
                   className="text-sm lg:text-base font-medium "
                 >
                   <BsPersonFill className="text-slate-500" /> আমার প্রোফাইল
@@ -86,8 +90,11 @@ const ProfilePage = () => {
               <div className="w-32 lg:w-46">
                 <Image
                   className=""
-                  alt="Tailwind-CSS-Avatar-component"
-                  src={userImg}
+                  alt="user image"
+
+                  src={user?.image || userImg}
+                  width={128}
+                  height={128}
                 />
               </div>
             </div>
@@ -121,7 +128,7 @@ const ProfilePage = () => {
 
                 <li>
                   <Link
-                    href="/updateProfile"
+                    href="/updateProfilePage"
                     className="text-sm lg:text-base font-medium "
                   >
                     <BsPersonFill className="text-slate-500" /> আমার প্রোফাইল

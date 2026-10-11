@@ -6,6 +6,7 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { IProductData } from "@/app/types/product";
 import { formatBangla } from "@/lib/formatBangla";
+import { formatBanglaWords } from "@/lib/formatBanglaWords";
 
 interface ProductCardProps {
   product: IProductData;
@@ -41,8 +42,8 @@ const ProductsCard = ({ product }: ProductCardProps) => {
             <h2 className="text-xl lg:text-2xl font-bold text-gray-900 leading-tight">
               {product.nameBn}
             </h2>
-            <p className="text-[13px] lg:text-lg text-gray-500 font-medium">
-              প্রতি কেজি
+            <p className="mt-2 text-[13px] lg:text-lg text-gray-500 font-medium">
+              প্রতি {formatBanglaWords(product.unit)}
             </p>
           </div>
         </div>

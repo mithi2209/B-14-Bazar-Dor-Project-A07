@@ -7,7 +7,6 @@ import NavLinks, { INavLinks } from "./NavLinks";
 import MarqueePage from "./Marquee";
 import CurrentDate from "./CurrentDate";
 import { AllCategoriesData } from "@/lib/page";
-import ProfilePage from './../../app/profile/page';
 import UserRegisterBtn from "./userRegisterBtn/UserRegisterBtn";
 
 
@@ -49,10 +48,6 @@ const Navbar = async() => {
             <UserRegisterBtn></UserRegisterBtn>
         
         </div>
-
-        {/*  dropdownMenu */}
-        {/* <ProfilePage></ProfilePage> */}
-       
 
       </nav>
         

@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { authClient } from './../../lib/auth-client';
 
 
+
 const SignUpPage = () => {
 
   const handleOnSubmit = async (e:React.SubmitEvent<HTMLElement>) => {
@@ -17,7 +18,7 @@ const SignUpPage = () => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const userData = Object.fromEntries(formData.entries()) as {name:string , email:string , password:string};
+        const userData = Object.fromEntries(formData.entries()) as {name:string , email:string , password:string ,image:string};
 
         const{ data ,error } = await authClient.signUp.email({
             ...userData,
@@ -27,7 +28,7 @@ const SignUpPage = () => {
         if(data){
           
           toast.success("Sign up successfully...")
-          redirect("/")
+          redirect("/signIn")
 
         }
 
@@ -37,6 +38,31 @@ const SignUpPage = () => {
         }
 
   };
+
+       // Google sign in
+    const handleGoogleSignIn = async() =>{
+
+       await authClient.signIn.social({
+        provider: "google",
+    });
+    
+    
+
+    } 
+      
+
+    // github sign in
+    const handleGithubSignIn = async()=>{
+        await authClient.signIn.social({
+          provider: "gitlab"
+      });
+      
+     
+      
+    }
+    
+
+
 
   return (
     <div className="min-h-screen bg-[#f3f6f4] flex flex-col items-center justify-center py-16 px-4">
@@ -133,12 +159,16 @@ const SignUpPage = () => {
 
           {/* Social Buttons */}
           <div className="flex flex-col gap-3 ">
-            <button className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
+            <button
+              onClick={handleGoogleSignIn}
+               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
               <FcGoogle className="text-red-500 text-lg" />
               <span>Google দিয়ে সাইনআপ করুন</span>
             </button>
 
-            <button className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
+            <button 
+              onClick={handleGithubSignIn}
+              className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
               <FaGithub className="text-black text-lg" />
               <span>Github দিয়ে সাইনআপ করুন</span>
             </button>

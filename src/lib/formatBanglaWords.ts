@@ -17,6 +17,10 @@ export function formatBanglaWords(text: string | undefined) {
     mangsho: "মাংস",
     "dim-dui":  "ডিম-দুধ",
     mosla : "মসলা",
+    kg : "কেজি",
+    litre:" লিটার",
+    dozen : "ডজন",
+    piece : "পিস"
   };
 
   return translations[text] || text;

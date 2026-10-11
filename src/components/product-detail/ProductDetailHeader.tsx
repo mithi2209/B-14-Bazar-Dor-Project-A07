@@ -3,6 +3,7 @@ import { TbMinus } from "react-icons/tb";
 import { formatBangla } from "@/lib/formatBangla";
 import { IProductData } from "@/app/types/product";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import { formatBanglaWords } from "@/lib/formatBanglaWords";
 
 
 const ProductDetailHeader = (product:IProductData) => {
@@ -39,7 +40,7 @@ const ProductDetailHeader = (product:IProductData) => {
                   </h1>
 
                   <p className="mt-1 text-xs md:text-sm lg:text-base text-gray-500">
-                      প্রতি {product.unit === "kg" ? "কেজি" : product.unit}
+                      প্রতি {formatBanglaWords(product.unit)}
                             {" · "}
                             {product.categoryNameBn}
                   </p>

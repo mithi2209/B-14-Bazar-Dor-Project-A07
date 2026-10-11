@@ -5,7 +5,6 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { redirect } from "next/navigation";
 import { authClient } from './../../lib/auth-client';
 
 const SignInPage = () => {
@@ -25,8 +24,7 @@ const SignInPage = () => {
         if(data){
           
           toast.success("Sign in successfully...")
-          
-
+        
         }
 
         if(error){
@@ -35,19 +33,33 @@ const SignInPage = () => {
 
   };
 
-
+    // Google sign in
     const handleGoogleSignIn = async() =>{
 
-      const data = await authClient.signIn.social({
-      provider: "google",
+       await authClient.signIn.social({
+        provider: "google",
     });
-    console.log(data)
-
+  
+    
+    
     }
     
+
+
+    // github sign in
+    const handleGithubSignIn = async()=>{
+         await authClient.signIn.social({
+          provider: "gitlab"
+      });
+     
+     
+    }
+    
+     
+
   return (
 
-    <div className="min-h-screen bg-[#f3f6f4] flex flex-col items-center justify-center py-16 px-4">
+    <div className="min-h-screen bg-[#f3f6f4] flex flex-col items-center justify-center py-12 px-4">
       {/* --- Header Section --- */}
       <div className="text-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
@@ -111,6 +123,7 @@ const SignInPage = () => {
           <div className="flex flex-col gap-3 ">
 
             <button 
+            
               onClick={handleGoogleSignIn}
               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
               <FcGoogle className="text-red-500 text-lg" />
@@ -118,7 +131,7 @@ const SignInPage = () => {
             </button>
 
             <button
-              type="submit"
+              onClick={handleGithubSignIn}
               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
             >
               <FaGithub className="text-black text-lg" />
