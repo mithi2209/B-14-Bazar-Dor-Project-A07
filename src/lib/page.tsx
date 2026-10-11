@@ -28,6 +28,9 @@ export const AllCategoriesData = async() =>{
       try{
         const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
 
+         if (!res.ok) {
+         throw new Error(`Categories API failed: ${res.status}`);
+      }
 
           
         const data = await res.json();

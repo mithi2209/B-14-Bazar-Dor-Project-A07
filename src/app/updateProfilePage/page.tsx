@@ -8,11 +8,14 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+
+
+
+export const dynamic = "force-dynamic";
 
 const UpdateProfilePage = () => {
-  
-  const router = useRouter();
+
+
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
