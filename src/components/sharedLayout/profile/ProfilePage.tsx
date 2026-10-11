@@ -58,13 +58,13 @@ const ProfilePage = () => {
             >
               <li>
                 <p className="text-sm lg:text-lg font-medium lg:font-semibold pb-0">
-                  {user?.name}
+                  {user.name}
                 </p>
               </li>
 
               <li>
                 <p className="pt-0 text-sm  text-gray-500 font-medium">
-                  {user?.email}
+                  {user.email}
                 </p>
               </li>
 
@@ -105,8 +105,9 @@ const ProfilePage = () => {
             <div className="dropdown dropdown-center">
               <div tabIndex={0} role="button" className="text-base font-medium">
                 <span className="flex items-center gap-1  ">
+
                   <p className="text-sm md:text-base lg:text-lg font-medium    lg:font-semibold">
-                    {user?.name}
+                    {user.name}
                   </p>
                   <MdOutlineArrowDropDown className="text-lg text-slate-500" />
                 </span>
@@ -118,13 +119,13 @@ const ProfilePage = () => {
               >
                 <li>
                   <p className="text-sm lg:text-lg font-medium lg:font-semibold pb-0">
-                   {user?.name}
+                   {user.name}
                   </p>
                 </li>
 
                 <li>
                   <p className="pt-0 text-sm  text-gray-500 font-medium">
-                    {user?.email}
+                    {user.email}
                   </p>
                 </li>
 

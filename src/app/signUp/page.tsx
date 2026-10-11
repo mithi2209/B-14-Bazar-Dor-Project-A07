@@ -17,6 +17,8 @@ const SignUpPage = () => {
 
         e.preventDefault();
 
+        
+
         const formData = new FormData(e.target);
         const userData = Object.fromEntries(formData.entries()) as {name:string , email:string , password:string ,image:string};
 
@@ -28,7 +30,8 @@ const SignUpPage = () => {
         if(data){
           
           toast.success("Sign up successfully...")
-          redirect("/signIn")
+          redirect("/signIn");
+          
 
         }
 

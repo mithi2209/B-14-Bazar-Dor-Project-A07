@@ -6,28 +6,54 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { authClient } from './../../lib/auth-client';
+import { useRouter, useSearchParams } from "next/navigation";
+
 
 const SignInPage = () => {
 
-   const handleOnSubmit = async (e:React.SubmitEvent<HTMLElement>) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const requestedURL = searchParams.get("callbackURL");
+
+    const callbackURL =
+    requestedURL?.startsWith("/") &&
+    !requestedURL.startsWith("//") &&
+    !requestedURL.includes("\\")
+      ? requestedURL
+      : "/";
+  
+
+   const handleOnSubmit = async (e:React.SubmitEvent<HTMLFormElement>) => {
 
         e.preventDefault();
 
+        const form = e.currentTarget;
+
         const formData = new FormData(e.target);
+
         const userData = Object.fromEntries(formData.entries()) as { email:string , password:string};
 
+          // const email = formData.get("email") as string;
+          // const password = formData.get("password") as string;
+
         const{ data ,error } = await authClient.signIn.email({
-            ...userData,
-            callbackURL : "/"
+           ...userData,
+            
+            
         })
         
         if(data){
-          
-          toast.success("Sign in successfully...")
-        
+         
+          toast.success("Sign in successfully...");
+          form.reset();
+            
+            router.replace(callbackURL);
+            router.refresh();
         }
 
         if(error){
+         
           toast.error(error.message);
         }
 
@@ -38,28 +64,28 @@ const SignInPage = () => {
 
        await authClient.signIn.social({
         provider: "google",
+        callbackURL: "/",
     });
   
-    
-    
+
     }
     
-
-
     // github sign in
     const handleGithubSignIn = async()=>{
          await authClient.signIn.social({
-          provider: "gitlab"
+          provider: "gitlab",
+          callbackURL: "/",
       });
      
      
     }
     
-     
 
   return (
 
+
     <div className="min-h-screen bg-[#f3f6f4] flex flex-col items-center justify-center py-12 px-4">
+      
       {/* --- Header Section --- */}
       <div className="text-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">

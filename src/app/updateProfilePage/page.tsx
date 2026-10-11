@@ -8,8 +8,11 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const UpdateProfilePage = () => {
+  const router = useRouter();
+
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
@@ -31,15 +34,23 @@ const UpdateProfilePage = () => {
   const handleUpdateProfile = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(e.target);
     const newUserData = Object.fromEntries(formData.entries()) as {
       name: string;
     };
 
     await authClient.updateUser({
       ...newUserData,
+      
     });
-    console.log(newUserData);
+
+    if(newUserData){
+      toast.success('Name updated successfully');
+      form.reset();
+
+    }
+   
   };
 
   return (
