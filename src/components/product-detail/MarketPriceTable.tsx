@@ -1,3 +1,5 @@
+
+
 import { formatBangla } from "@/lib/formatBangla";
 import { IProductData} from "@/app/types/product";
 
@@ -6,7 +8,7 @@ const MarketPriceTable = (product:IProductData) => {
     return (
         <div>
 
-            {/* Price table */}
+          {/* Price table */}
           <h2 className="mb-5 mt-6 text-lg lg:text-xl font-semibold text-gray-800">
             বাজারভিত্তিক আজকের দাম
           </h2>
@@ -30,7 +32,7 @@ const MarketPriceTable = (product:IProductData) => {
                 {product.markets.map((market, index) => (
                     <tr
                         key={`${market.market}-${index}`}
-                        className={`text-xs lg:text-sm font-medium text-gray-600
+                        className={`text-xs lg:text-sm font-semibold text-gray-600
                             ${index % 2 === 0
                             ? "bg-[#f0f5f0]"
                             : "bg-white"}
@@ -52,11 +54,9 @@ const MarketPriceTable = (product:IProductData) => {
                         Math.round((market.min + market.max) / 2)
                     )} টাকা
                     </td>
-          </tr>
-        ))}
+                </tr>
+              ))}
      
-
-
 
               </tbody>
             </table>

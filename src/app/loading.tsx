@@ -2,7 +2,7 @@
 
 const GlobalLoading = () => {
   return (
-    <div className="py-40 lg:py-80 flex flex-col justify-center items-center">
+    <div className="py-40 lg:py-100 flex flex-col justify-center items-center">
   
       {/* Loading text */}
       <p className="text-green-600 text-2xl lg:text-4xl text-center font-semibold mb-4 animate-pulse">
@@ -18,6 +18,7 @@ const GlobalLoading = () => {
 
     
     </div>
+
   );
 };
 

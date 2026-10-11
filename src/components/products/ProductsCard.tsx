@@ -27,6 +27,7 @@ const ProductsCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link href={`/product/${product.id}`}>
+
       <div className="card w-full bg-white rounded-[2rem] shadow-md border-2 border-gray-200 py-8 px-6  hover:border-green-600">
         {/* Header: Icon and Title */}
         <div className="flex items-center gap-4 mb-5">
@@ -60,7 +61,7 @@ const ProductsCard = ({ product }: ProductCardProps) => {
 
             {/* pct Badge */}
             <button
-              className={`inline-flex items-center justify-center rounded-full px-2.5 py-2 gap-1 font-semibold text-xs lg:text-base ${pctStyles}`}
+              className={`inline-flex items-center justify-center rounded-full px-2.5 py-2 gap-1 font-semibold text-sm lg:text-base ${pctStyles}`}
             >
               {dir === "up" && product.change.pct > 0 ? (
                 <TiArrowSortedUp className="text-lg" />
@@ -70,7 +71,7 @@ const ProductsCard = ({ product }: ProductCardProps) => {
                 <TbMinus className="text-lg" />
               )}
 
-              <span>{formatBangla(product.change.pct)} %</span>
+              <span>{formatBangla(Math.abs(product.change.pct))} %</span>
 
               {/* Upward Arrow SVG */}
               {/* <TiArrowSortedUp className="text-lg"></TiArrowSortedUp>

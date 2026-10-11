@@ -1,8 +1,4 @@
 
-
-
-
-
 const CategoryLoadingSkeleton = () => {
   return (
     <section className="min-h-screen bg-[#F0F5EF] px-3 py-5 sm:px-6">

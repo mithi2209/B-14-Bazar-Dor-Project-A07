@@ -17,7 +17,8 @@ const BannerPage = () => {
 
                 {/* Left Content */}
                 <div className="w-full min-w-0 md:flex-1">
-                <span className="inline-block rounded-full bg-[#dff2e5] px-3 py-1.5 text-xs font-medium text-green-700 sm:text-sm">
+
+                <span className="inline-block rounded-full bg-[#dff2e5] px-4 py-2.5 text-sm font-semibold text-green-700 sm:text-sm">
                     {date}
                 </span>
 
@@ -33,7 +34,7 @@ const BannerPage = () => {
 
                 <a
                     href="#all-products"
-                    className="btn mt-5 min-h-10 h-10 border-0 bg-[#078b43] p-2 lg:p-5 text-sm text-white rounded-lg drop-shadow-sm hover:bg-green-500 sm:mt-7 sm:px-6"
+                    className="btn mt-5 min-h-10 h-10 border-0 bg-[#078b43] p-2 lg:p-5 text-sm text-white rounded-lg shadow-md shadow-green-200 border-none hover:bg-green-500 sm:mt-7 sm:px-6 "
                 >
                     সব পণ্য দেখুন
                 </a>

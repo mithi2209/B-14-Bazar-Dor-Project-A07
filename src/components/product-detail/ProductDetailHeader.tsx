@@ -9,11 +9,7 @@ const ProductDetailHeader = (product:IProductData) => {
 
       const { dir } = product.change;
 
-    
-
     const priceDifference = product.today - product.yesterday;
-
-
 
       const pctStyles =
         dir === "down"
@@ -54,7 +50,7 @@ const ProductDetailHeader = (product:IProductData) => {
                             {priceDifference > 0 ? "বেড়েছে" : priceDifference < 0 ? "কমেছে" : "অপরিবর্তিত"}
                         </span>
                         {" : "}
-                         {formatBangla(Math.abs(priceDifference))} টাকা
+                         <span className="font-semibold">{formatBangla(Math.abs(priceDifference))}</span> টাকা
                   </p>
                 </div>
               </div>
@@ -82,7 +78,7 @@ const ProductDetailHeader = (product:IProductData) => {
                         <TbMinus className="text-lg" />
                     )}
 
-                    <span>{formatBangla(product.change.pct)} %</span>
+                    <span>{formatBangla(Math.abs(product.change.pct))} %</span>
 
                 </p>
                 

@@ -4,6 +4,8 @@ import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import AllProductsDataFetch from "@/lib/page";
 import { formatBangla } from "@/lib/formatBangla";
+
+
 interface IHeadline {
   id: number;
   nameBn: string;
@@ -25,7 +27,7 @@ const MarqueePage =  async() => {
 
       <MarqueeText duration={20} direction="right">
 
-        {data.slice(0, 10).map((headlines) => {
+        {data.map((headlines) => {
           
           const pct = headlines.change.pct;
 
@@ -35,7 +37,7 @@ const MarqueePage =  async() => {
               className=" flex items-center mx-2 border-r-2 border-[#F0F5EF] py-2"
             >
               <li>
-                {headlines.categoryIcon}
+                {headlines.image}
                 <span className="mx-2 font-semibold text-sm lg:text-base">
                   {headlines.nameBn}
                 </span>
@@ -71,7 +73,7 @@ const MarqueePage =  async() => {
                     </span>
                     ) 
                     :(
-                    <span>{formatBangla(headlines.change.pct)}%</span>
+                    <span>{formatBangla(Math.abs(headlines.change.pct))}%</span>
                     )
                 }
               </li>

@@ -7,7 +7,7 @@ const CurrentDate = () => {
     });
     return (
         <div>
-            <p className="mt-1 text-[10px] md:text-xs lg:text-xl">{date}</p>
+            <p className="mt-1 text-[10px] md:text-xs lg:text-sm font-semibold">{date}</p>
         </div>
     );
 };
