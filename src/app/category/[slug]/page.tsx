@@ -18,9 +18,6 @@ interface CategoryProps {
   params: Promise<{ slug: string }>;
 }
 
-
-
-
 const CategoriesProduct = async ({ params }: CategoryProps) => {
     
   const { slug } = await params;

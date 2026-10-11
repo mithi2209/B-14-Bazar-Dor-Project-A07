@@ -12,16 +12,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 const SignInPage = () => {
 
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  const requestedURL = searchParams.get("callbackURL");
+  // const requestedURL = searchParams.get("callbackURL");
 
-    const callbackURL =
-    requestedURL?.startsWith("/") &&
-    !requestedURL.startsWith("//") &&
-    !requestedURL.includes("\\")
-      ? requestedURL
-      : "/";
+    // const callbackURL =
+    // requestedURL?.startsWith("/") &&
+    // !requestedURL.startsWith("//") &&
+    // !requestedURL.includes("\\")
+    //   ? requestedURL
+    //   : "/";
   
 
    const handleOnSubmit = async (e:React.SubmitEvent<HTMLFormElement>) => {
@@ -48,7 +48,7 @@ const SignInPage = () => {
           toast.success("Sign in successfully...");
           form.reset();
             
-            router.replace(callbackURL);
+            // router.replace(callbackURL);
             router.refresh();
         }
 

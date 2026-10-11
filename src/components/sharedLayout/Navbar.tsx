@@ -13,6 +13,8 @@ import UserRegisterBtn from "./userRegisterBtn/UserRegisterBtn";
 const Navbar = async() => {
 
     const data: INavLinks[] = await AllCategoriesData();
+    
+    
 
     
   return (
