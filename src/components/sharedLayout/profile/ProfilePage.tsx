@@ -9,6 +9,7 @@ import { BsArrowReturnLeft } from "react-icons/bs";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { authClient } from '@/lib/auth-client';
 import UserRegisterBtn from '@/components/sharedLayout/userRegisterBtn/UserRegisterBtn';
+import { toast } from "react-toastify";
 
 
 const ProfilePage = () => {
@@ -20,6 +21,7 @@ const ProfilePage = () => {
   const handleSignOut = async() =>{
 
     await authClient.signOut();
+     toast.info("Sign out successfully");
 
   }
 
