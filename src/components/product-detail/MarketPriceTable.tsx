@@ -14,7 +14,7 @@ const MarketPriceTable = (product:IProductData) => {
           </h2>
 
           
-          <div className="overflow-x-auto rounded-2xl border-2 border-[#F0F5EF]">
+          <div className="overflow-x-auto w-full rounded-2xl border-2 border-[#F0F5EF]">
             <table className="table table-xs lg:table-md w-full py-3 md:py-2 ">
               <thead >
                 <tr className="text-gray-500 text-semibold text-sm lg:text-lg ">

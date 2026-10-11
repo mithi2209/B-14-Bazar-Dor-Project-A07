@@ -22,7 +22,7 @@ const ProductDetailHeader = (product:IProductData) => {
     return (
         <div>
           {/* Product Card */}
-          <div className="card rounded-2xl border border-[#e1e9e1] bg-[#fbfdfb] shadow-none">
+          <div className="px-3 lg:px-5 py-3 rounded-2xl border border-[#e1e9e1] bg-[#fbfdfb] shadow-none">
             <div className="flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:justify-between sm:p-4 md:p-2">
               {/* Product Details */}
               <div className="flex justify-center items-center gap-3 md:gap-4">

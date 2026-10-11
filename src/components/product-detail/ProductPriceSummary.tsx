@@ -37,7 +37,8 @@ const ProductPriceSummary =(product:IProductData)=> {
 
              {/* card */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="card rounded-2xl border border-[#e5ece6] bg-transparent shadow">
+
+            <div className="px-3 py-3 rounded-2xl border border-[#e5ece6] bg-transparent shadow">
               <div className="card-body flex-row items-center justify-between p-3">
                 <div>
                   <p className="text-sm lg:text-base text-gray-700">
@@ -54,7 +55,7 @@ const ProductPriceSummary =(product:IProductData)=> {
               </div>
             </div>
 
-            <div className="card rounded-2xl border border-[#e5ece6] bg-transparent shadow">
+            <div className="px-3 py-3 rounded-2xl border border-[#e5ece6] bg-transparent shadow">
               <div className="card-body flex-row items-center justify-between p-3">
                 <div>
                   <p className="text-sm lg:text-base text-gray-600">
@@ -70,7 +71,7 @@ const ProductPriceSummary =(product:IProductData)=> {
               </div>
             </div>
 
-            <div className="card rounded-2xl border border-[#e5ece6] bg-transparent shadow sm:col-span-2 lg:col-span-1">
+            <div className="px-3 py-3 rounded-2xl border border-[#e5ece6] bg-transparent shadow sm:col-span-2 lg:col-span-1">
               <div className="card-body flex-row items-center justify-between p-3">
                 <div>
                   <p className="text-sm lg:text-base text-gray-600">গড় দাম</p>

@@ -4,6 +4,7 @@ import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import AllProductsDataFetch from "@/lib/page";
 import { formatBangla } from "@/lib/formatBangla";
+import Link from 'next/link';
 
 
 interface IHeadline {
@@ -25,32 +26,37 @@ const MarqueePage =  async() => {
   return (
     <div className="border-t border-[#F0F5EF] border-b-2  ">
 
-      <MarqueeText duration={20} direction="right">
+      <MarqueeText duration={15} direction="right">
 
-        {data.map((headlines) => {
+     
+
+      {data.map((headlines) => {
           
           const pct = headlines.change.pct;
 
           return (
-            <ul
+            <Link  
               key={headlines.id}
-              className=" flex items-center mx-2 border-r-2 border-[#F0F5EF] py-2"
-            >
-              <li>
-                {headlines.image}
-                <span className="mx-2 font-semibold text-sm lg:text-base">
-                  {headlines.nameBn}
-                </span>
-              </li>
-              <li>
-                <span className="mr-2 text-sm lg:text-base">
-                  {formatBangla(headlines.today)} টাকা/কেজি
-                </span>
-              </li>
-              <li
-                className={`text-sm lg:text-base mr-2
+              href={`/product/${headlines.id}`}>
+            
+              <ul className=" flex items-center mx-2 border-r-2 border-[#F0F5EF] py-2">
+                <li>
+                  {headlines.image}
+                  <span className="mx-2 font-semibold text-sm lg:text-base">
+                    {headlines.nameBn}
+                  </span>
+                </li>
 
-                  ${
+                <li>
+                  <span className="mr-2 text-sm lg:text-base">
+                    {formatBangla(headlines.today)} টাকা/কেজি
+                  </span>
+                </li>
+
+                <li
+                  className={`text-sm lg:text-base mr-2
+
+                    ${
                       headlines.change.dir === "up"
                       ? "text-red-700"
                       : headlines.change.dir === "down"
@@ -58,7 +64,7 @@ const MarqueePage =  async() => {
                       : "text-black"
                       }`}>
                         
-                {
+                  {
                     headlines.change.dir === "up" && headlines.change.pct > 0 ? (
                     <span className="flex justify-center items-center">
                         <IoMdArrowDropup className="text-xl lg:text-3xl " />
@@ -75,13 +81,15 @@ const MarqueePage =  async() => {
                     :(
                     <span>{formatBangla(Math.abs(headlines.change.pct))}%</span>
                     )
-                }
-              </li>
+                  }
+                </li>
 
-            </ul>
+              </ul>
+            </Link>
             
           );
         })}
+      
       </MarqueeText>
     </div>
   );

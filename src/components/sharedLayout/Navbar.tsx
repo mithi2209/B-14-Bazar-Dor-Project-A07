@@ -7,6 +7,8 @@ import NavLinks, { INavLinks } from "./NavLinks";
 import MarqueePage from "./Marquee";
 import CurrentDate from "./CurrentDate";
 import { AllCategoriesData } from "@/lib/page";
+import ProfilePage from './../../app/profile/page';
+import UserRegisterBtn from "./userRegisterBtn/UserRegisterBtn";
 
 
 const Navbar = async() => {
@@ -15,7 +17,7 @@ const Navbar = async() => {
 
     
   return (
-    <header className="">
+    <header className="sticky top-0 z-50 w-full  bg-white">
       <nav className=" container py-5 px-4 md:px-5 lg:px-0 mx-auto flex justify-between items-center gap-3  ">
         {/* Part-1 */}
         <div className=" flex justify-start items-center gap-2">
@@ -40,25 +42,11 @@ const Navbar = async() => {
 
         
         {/* part-2 */}
+
         {/* SIGN IN AND SIGN UP BTN */}
-        <div className="flex items-center gap-1 lg:gap-3">
+        <div >
 
-            <Link href="/signIn">
-
-                <button className="btn btn-ghost hover:border-2 hover:border-green-700 hover:bg-[#f0f5f0] hover:rounded-lg lg:hover:p-5 hover:p-2">
-                    <span className="font-semibold text-sm md:text-base">সাইন ইন</span>
-                </button>
-           
-           </Link>
-
-              <Link href="/signUp">
-                
-                <button className="btn bg-green-700 p-2 lg:p-5 rounded-lg shadow-md shadow-green-200 border-none hover:bg-green-500">
-                    <span className="font-semibold text-white text-sm md:text-base">
-                        সাইন আপ
-                    </span>
-                </button>
-            </Link>
+            <UserRegisterBtn></UserRegisterBtn>
         
         </div>
 

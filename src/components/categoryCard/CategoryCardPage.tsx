@@ -63,7 +63,7 @@ const CategoryCardPage = ({ category,categoryData }:CategoryCardPageProps) => {
         <CategoryBreadCrumb category={category}></CategoryBreadCrumb>
 
         {/* --- Header Card --- */}
-        <div className="card bg-white  shadow-sm rounded-2xl p-4 md:p-6 border border-[#F0F5EF]">
+        <div className=" bg-white shadow-sm rounded-2xl p-4 md:p-6 border border-[#F0F5EF]">
 
           <div className="flex items-center gap-3">
 
@@ -85,7 +85,7 @@ const CategoryCardPage = ({ category,categoryData }:CategoryCardPageProps) => {
         </div>
 
         {/* --- Sort Filter Bar --- */}
-        <div className="card bg-white shadow-sm rounded-2xl p-3 md:p-4 lg:p-6  border border-[#F0F5EF] flex flex-row items-center justify-end gap-3">
+        <div className=" bg-white shadow-sm rounded-2xl p-3 md:p-4 lg:p-6  border border-[#F0F5EF] flex flex-row items-center justify-end gap-3">
 
           <span className="text-sm md:text-base lg:text-lg font-medium text-gray-600">সাজান</span>
 

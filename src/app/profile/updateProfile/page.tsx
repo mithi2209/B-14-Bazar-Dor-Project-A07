@@ -1,10 +1,11 @@
 
+import UpdateProfileForm from '../../../components/updateProfileForm/updateProfileForm';
 
 const UpdateProfilePage = () => {
     return (
-        <div>
-            
-        </div>
+     <main className="min-h-screen bg-gray-50 py-10 px-4">
+<UpdateProfileForm />
+</main>
     );
 };
 

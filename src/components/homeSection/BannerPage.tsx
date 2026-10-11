@@ -11,7 +11,7 @@ const BannerPage = () => {
 
     return (
        <section className="px-4 md:px-5 lg:px-0 container mx-auto py-14 ">
-             <div className="bg-white rounded-4xl shadow-lg border border-[#F0F5EF] px-6 py-6 lg:py-5 lg:px-10 ">
+             <div className="bg-white rounded-4xl shadow-lg border border-[#F0F5EF] px-6 py-6 lg:py-10 lg:px-10 ">
 
             <div className=" flex  flex-col-reverse items-center justify-between gap-6 lg:gap-0 md:flex-row ">
 
@@ -47,8 +47,8 @@ const BannerPage = () => {
                     <Image
                     
                         className=""
-                        width={400}
-                        height={400}
+                        width={"auto"}
+                        height={"auto"}
                         src={heroImg}
                         alt="banner image">
 

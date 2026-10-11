@@ -1,10 +1,10 @@
 
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import { ToastContainer} from 'react-toastify';
 import Navbar from '../components/sharedLayout/Navbar';
 import Footer from '../components/sharedLayout/Footer';
-import { Suspense } from "react";
 import GlobalLoading from "./loading";
 import "./globals.css";
 
@@ -35,14 +35,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         <Navbar></Navbar>
         
-          {children}
+         <main>
+             {children}
+         </main>
         
       
         <Footer></Footer>
-      
-      
-      <ToastContainer />
+        
       </Suspense>
+      <ToastContainer />
     </body>
    
     </html>
