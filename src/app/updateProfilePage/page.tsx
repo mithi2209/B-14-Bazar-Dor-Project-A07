@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const UpdateProfilePage = () => {
+  
   const router = useRouter();
 
   const { data: session } = authClient.useSession();

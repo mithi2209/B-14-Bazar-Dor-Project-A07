@@ -57,7 +57,7 @@ const SignUpPage = () => {
     // github sign in
     const handleGithubSignIn = async()=>{
         await authClient.signIn.social({
-          provider: "gitlab"
+          provider: "github"
       });
       
      
