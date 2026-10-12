@@ -15,7 +15,7 @@ const db = client.db("bazar-dor-auth-project");
 
       trustedOrigins: [
       "http://localhost:3000",
-      "https://b-14-bazar-dor-project-a07.vercel.app",
+      "https://b-14-bazar-dor-project-a07.vercel.app/",
       ],
 
         database: mongodbAdapter(db, {
