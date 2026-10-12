@@ -6,31 +6,46 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { redirect } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { authClient } from './../../lib/auth-client';
 
 
 
 const SignUpPage = () => {
+  
+  const router = useRouter();
 
   const handleOnSubmit = async (e:React.SubmitEvent<HTMLElement>) => {
 
         e.preventDefault();
 
         
-
+        // const form = e.currentTarget
         const formData = new FormData(e.target);
-        const userData = Object.fromEntries(formData.entries()) as {name:string , email:string , password:string ,image:string};
+        // const userData = Object.fromEntries(formData.entries()) as {name:string , email:string , password:string ,image:string};
+
+      const name = String(formData.get("name") ?? "");
+      const email = String(formData.get("email") ?? "");
+      const password = String(formData.get("password") ?? "");
+      const confirmPassword = String(formData.get("confirmPassword") ?? "");
+
+        if (password !== confirmPassword) {
+          toast.error("Passwords do not match.");
+          return;
+        }
 
         const{ data ,error } = await authClient.signUp.email({
-            ...userData,
+            name,
+            email,
+            password,
             callbackURL : "/"
         })
         
         if(data){
           
-          toast.success("Sign up successfully...")
-          redirect("/signIn");
+          toast.success("Sign up successfully...");
+         
+          router.push("/signIn");
           
 
         }
@@ -137,7 +152,7 @@ const SignUpPage = () => {
                 </span>
               </label>
               <input
-                name="password"
+                name="confirmPassword"
                 type="password"
                 placeholder="আবার লিখুন"
                 className="input input-bordered font-medium w-full bg-white border-gray-300 focus:border-green-600 focus:outline-none rounded-lg text-sm h-11"

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { authClient } from './../../lib/auth-client';
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 
 const SignInPage = () => {
@@ -34,12 +34,15 @@ const SignInPage = () => {
 
         const userData = Object.fromEntries(formData.entries()) as { email:string , password:string};
 
+        // const name = String(formData.get("name") ?? "");
+        // const email = String(formData.get("email") ?? "");
+
+
           // const email = formData.get("email") as string;
           // const password = formData.get("password") as string;
 
         const{ data ,error } = await authClient.signIn.email({
-           ...userData,
-            
+          ...userData
             
         })
         
@@ -49,6 +52,8 @@ const SignInPage = () => {
           form.reset();
             
             // router.replace(callbackURL);
+
+           router.replace("/");
             router.refresh();
         }
 

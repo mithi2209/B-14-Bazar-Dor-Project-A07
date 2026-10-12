@@ -8,6 +8,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
 import { useState } from "react";
+import { router } from "better-auth/api";
 
 
 
@@ -22,6 +23,7 @@ const UpdateProfilePage = () => {
   const handleSignOut = async () => {
     await authClient.signOut();
     toast.info("Sign out successfully");
+    
   };
 
   // toggle btns for edit

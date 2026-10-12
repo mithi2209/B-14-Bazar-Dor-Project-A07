@@ -2,7 +2,7 @@ import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { AllCategoriesData } from "@/lib/page";
+import AllProductsDataFetch  from "@/lib/page";
 import { formatBangla } from "@/lib/formatBangla";
 import Link from 'next/link';
 
@@ -21,7 +21,7 @@ interface IHeadline {
 
 const MarqueePage =  async() => {
 
-  const data: IHeadline[] = await AllCategoriesData();
+  const data: IHeadline[] = await AllProductsDataFetch();
 
   return (
     <div className="border-t border-[#F0F5EF] border-b-2  ">
@@ -32,7 +32,7 @@ const MarqueePage =  async() => {
 
       {data.map((headlines) => {
           
-          const pct = headlines.change.pct;
+          const pct = headlines.change?.pct;
 
           return (
             <Link  
@@ -57,29 +57,29 @@ const MarqueePage =  async() => {
                   className={`text-sm lg:text-base mr-2
 
                     ${
-                      headlines.change.dir === "up"
+                      headlines.change?.dir === "up"
                       ? "text-red-700"
-                      : headlines.change.dir === "down"
+                      : headlines.change?.dir === "down"
                       ? "text-green-700"
                       : "text-black"
                       }`}>
                         
                   {
-                    headlines.change.dir === "up" && headlines.change.pct > 0 ? (
+                    headlines.change?.dir === "up" && headlines.change?.pct > 0 ? (
                     <span className="flex justify-center items-center">
                         <IoMdArrowDropup className="text-xl lg:text-3xl " />
                         {formatBangla(Math.abs(pct))}%
                     </span>
                     )
-                    : headlines.change.dir === "down" &&
-                    headlines.change.pct < 0 ? (
+                    : headlines.change?.dir === "down" &&
+                    headlines.change?.pct < 0 ? (
                     <span className="flex justify-center items-center">
                         <IoMdArrowDropdown className="text-xl lg:text-3xl " />
                         {formatBangla(Math.abs(pct))}%
                     </span>
                     ) 
                     :(
-                    <span>{formatBangla(Math.abs(headlines.change.pct))}%</span>
+                    <span>{formatBangla(Math.abs(headlines.change?.pct))}%</span>
                     )
                   }
                 </li>
