@@ -1,6 +1,7 @@
 
 
-import { auth } from './lib/auth';
+// import { auth } from './lib/auth';
+import { getSessionCookie } from 'better-auth/cookies';
 import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
@@ -12,19 +13,32 @@ import type { NextRequest } from 'next/server'
 
 export async function proxy(request: NextRequest) {
 
-  const session = await auth.api.getSession({
-      headers: request.headers,
-    });
 
-  //  go to sign-in page
-    if (!session?.user) {
-      return NextResponse.redirect(
-        new URL("/signIn", request.url)
-      );
-    }
+  // .............method -2.................
 
-    //  allow the product page
-    return NextResponse.next();
+   if (!getSessionCookie(request)) {
+        return NextResponse.redirect(new URL("/signIn", request.url));
+      }
+      return NextResponse.next();
+
+
+
+
+
+  // ................method-1............
+  // const session = await auth.api.getSession({
+  //     headers: request.headers,
+  //   });
+
+  // //  go to sign-in page
+  //   if (!session?.user) {
+  //     return NextResponse.redirect(
+  //       new URL("/signIn", request.url)
+  //     );
+  //   }
+
+  //   //  allow the product page
+  //   return NextResponse.next();
 
  
  }
