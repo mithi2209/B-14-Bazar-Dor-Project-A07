@@ -8,13 +8,14 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { MdModeEditOutline } from "react-icons/md";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 
 
 const UpdateProfilePage = () => {
 
-
+const router = useRouter();
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -23,6 +24,8 @@ const UpdateProfilePage = () => {
   const handleSignOut = async () => {
     await authClient.signOut();
     toast.info("Sign out successfully");
+      router.replace("/");
+      router.refresh();
     
   };
 

@@ -10,9 +10,12 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { authClient } from '@/lib/auth-client';
 import UserRegisterBtn from '@/components/sharedLayout/userRegisterBtn/UserRegisterBtn';
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 
 const ProfilePage = () => {
+
+  const router = useRouter();
 
     const { data: session } = authClient.useSession();
     const user = session?.user;
@@ -22,6 +25,8 @@ const ProfilePage = () => {
 
     await authClient.signOut();
      toast.info("Sign out successfully");
+      router.replace("/");
+      router.refresh();
 
   }
 
