@@ -4,18 +4,38 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-const client = new MongoClient(process.env.MONGODB_URL! as string);
+// const client = new MongoClient(process.env.MONGODB_URL! as string);
+
+// const db = client.db("bazar-dor-auth-project");
+
+  
+
+const globalForMongo = global as unknown as { mongoClient?: MongoClient };
+
+const client =
+  globalForMongo.mongoClient ??
+  new MongoClient(process.env.MONGODB_URL as string);
+
+globalForMongo.mongoClient = client;
 
 const db = client.db("bazar-dor-auth-project");
 
-  export const auth = betterAuth({
+
+
+
+
+
+
+
+
+export const auth = betterAuth({
 
     baseURL: process.env.BETTER_AUTH_URL,
     secret: process.env.BETTER_AUTH_SECRET,
 
       trustedOrigins: [
       "http://localhost:3000",
-      "https://b-14-bazar-dor-project-a07.vercel.app/",
+      "https://b-14-bazar-dor-project-a07.vercel.app",
       ],
 
         database: mongodbAdapter(db, {
