@@ -10,14 +10,14 @@ import type { NextRequest } from 'next/server'
 
 export async function proxy(request: NextRequest) {
 
-  // const session = await auth.api.getSession({
-  //   headers: await headers()
-
-  // })
-
   const session = await auth.api.getSession({
-    headers: request.headers,
-  });
+    headers: await headers()
+
+  })
+
+  // const session = await auth.api.getSession({
+  //   headers: request.headers,
+  // });
 
   const user = session?.user
 
