@@ -8,9 +8,13 @@ import { IProductData } from "@/app/types/product";
 import { formatBangla } from "@/lib/formatBangla";
 import { formatBanglaWords } from "@/lib/formatBanglaWords";
 
+
 interface ProductCardProps {
   product: IProductData;
 }
+
+
+
 
 const ProductsCard = ({ product }: ProductCardProps) => {
 
