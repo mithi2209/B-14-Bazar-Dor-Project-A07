@@ -6,7 +6,9 @@ import { IProductData } from "@/app/types/product";
 const AllProductsDataFetch = async() => {
 
    try{
-        const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
+            const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products", {
+               next: { revalidate: 3600 },
+            });
 
        
         const data = await res.json() ;

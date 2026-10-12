@@ -2,7 +2,7 @@ import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
-import AllProductsDataFetch from "@/lib/page";
+import { AllCategoriesData } from "@/lib/page";
 import { formatBangla } from "@/lib/formatBangla";
 import Link from 'next/link';
 
@@ -21,7 +21,7 @@ interface IHeadline {
 
 const MarqueePage =  async() => {
 
-  const data: IHeadline[] = await AllProductsDataFetch();
+  const data: IHeadline[] = await AllCategoriesData();
 
   return (
     <div className="border-t border-[#F0F5EF] border-b-2  ">
