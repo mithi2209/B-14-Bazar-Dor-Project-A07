@@ -13,7 +13,7 @@ export async function proxy(request: NextRequest) {
   const session = await auth.api.getSession({
     headers: await headers()
 
-  })
+  });
 
   console.log("PROXY session:", session?.user?.email, "| has cookie:", request.headers.has("cookie"));
 
