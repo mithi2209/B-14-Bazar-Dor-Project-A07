@@ -27,21 +27,25 @@ export async function proxy(request: NextRequest) {
 
 
   // ................method-1............
+  try {
     const session = await auth.api.getSession({
       headers: request.headers,
     });
 
     if (!session?.user) {
-      console.log("No valid session:", request.nextUrl.pathname);
-
       return NextResponse.redirect(
         new URL("/signIn", request.url)
       );
     }
 
     return NextResponse.next();
- 
- }
+  } catch (error) {
+    console.error("Proxy session error:", error);
+
+    return NextResponse.redirect(
+      new URL("/signIn", request.url)
+    );
+  }
  
 
 
