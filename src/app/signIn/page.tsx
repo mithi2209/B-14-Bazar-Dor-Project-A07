@@ -42,8 +42,7 @@ const SignInPage = () => {
           // const password = formData.get("password") as string;
 
         const{ data ,error } = await authClient.signIn.email({
-          ...userData
-            
+          ...userData,
         })
         
         if(data){
@@ -51,14 +50,12 @@ const SignInPage = () => {
           toast.success("Sign in successfully...");
           form.reset();
             
-            // router.replace(callbackURL);
-
-           router.replace("/");
+          // router.replace(callbackURL);
+          router.replace("/");
           router.refresh();
         }
 
         if(error){
-         
           toast.error(error.message);
         }
 

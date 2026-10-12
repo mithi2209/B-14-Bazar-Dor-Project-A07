@@ -46,10 +46,10 @@ const SignUpPage = () => {
           toast.success("Sign up successfully...");
          
           router.push("/signIn");
-          
 
         }
 
+        
         if(error){
           
           toast.error(error.message);
@@ -62,6 +62,7 @@ const SignUpPage = () => {
 
        await authClient.signIn.social({
         provider: "google",
+        callbackURL: "/",
     });
     
     
@@ -72,7 +73,8 @@ const SignUpPage = () => {
     // github sign in
     const handleGithubSignIn = async()=>{
         await authClient.signIn.social({
-          provider: "github"
+          provider: "github",
+          callbackURL: "/",
       });
       
      
