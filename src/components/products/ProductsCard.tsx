@@ -27,7 +27,7 @@ const ProductsCard = ({ product }: ProductCardProps) => {
 
 
   return (
-    <Link href={`/product/${product.id}`}>
+    <Link href={`/product/${product.id}`}  prefetch={false} >
 
       <div className=" w-full bg-white rounded-[2rem] shadow-md border-2 border-gray-200 py-8 px-6  hover:border-green-600">
         {/* Header: Icon and Title */}

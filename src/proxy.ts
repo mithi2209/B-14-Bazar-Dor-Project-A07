@@ -1,31 +1,44 @@
 
 
-import { headers } from 'next/headers';
 import { auth } from './lib/auth';
 import { NextResponse } from 'next/server'
+
+// import { headers } from 'next/headers';
+
 import type { NextRequest } from 'next/server'
+
+import { getSessionCookie } from "better-auth/cookies";
 
  
 // This function can be marked `async` if using `await` inside
 
 export async function proxy(request: NextRequest) {
 
-  const session = await auth.api.getSession({
-    headers: await headers()
+  // const session = await auth.api.getSession({
+  //   headers: await headers()
 
-  });
+  // });
 
-  console.log("PROXY session:", session?.user?.email, "| has cookie:", request.headers.has("cookie"));
+   const sessionCookie = getSessionCookie(request);
+
+  if (!sessionCookie) {
+    return NextResponse.redirect(new URL("/signIn", request.url));
+  }
+
+  return NextResponse.next();
+
+
+  // console.log("PROXY session:", session?.user?.email, "| has cookie:", request.headers.has("cookie"));
 
   // const session = await auth.api.getSession({
   //   headers: request.headers,
   // });
 
-  const user = session?.user
+  // const user = session?.user
 
-  if(!user){
-     return NextResponse.redirect(new URL('/signIn', request.url))
-  }
+  // if(!user){
+  //    return NextResponse.redirect(new URL('/signIn', request.url))
+  // }
 
   
   // to return exact detail page 
