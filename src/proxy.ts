@@ -1,7 +1,7 @@
 
 
 // import { auth } from './lib/auth';
-import { getSessionCookie } from 'better-auth/cookies';
+// import { getSessionCookie } from 'better-auth/cookies';
 import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
@@ -46,6 +46,8 @@ export async function proxy(request: NextRequest) {
       new URL("/signIn", request.url)
     );
   }
+
+}
  
 
 
