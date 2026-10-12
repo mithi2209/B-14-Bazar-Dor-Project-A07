@@ -54,7 +54,7 @@ const SignInPage = () => {
             // router.replace(callbackURL);
 
            router.replace("/");
-            router.refresh();
+          router.refresh();
         }
 
         if(error){

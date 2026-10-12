@@ -5,21 +5,16 @@ import { IProductData } from "@/app/types/product";
 
 const AllProductsDataFetch = async() => {
 
-   try{
+  
          const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
 
-         if (!res.ok) {
-         throw new Error(`Products API failed: ${res.status}`);
-         }
+      
             
        
         const data = await res.json() ;
         return(data);
-     }
-     catch (error) {
-        console.error("Product API error:", error);
-        return [];
-     }
+    
+    
     
 };
 
@@ -29,21 +24,21 @@ export default AllProductsDataFetch;
 
 export const AllCategoriesData = async() =>{
 
-      try{
+      
         const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
 
-         if (!res.ok) {
-         throw new Error(`Categories API failed: ${res.status}`);
-      }
+      //    if (!res.ok) {
+      //    throw new Error(`Categories API failed: ${res.status}`);
+      // }
 
           
         const data = await res.json();
         return(data);
-     }
-     catch (error) {
-        console.error("Product API error:", error);
-        return [];
-     }
+    
+   //   catch (error) {
+   //      console.error("Product API error:", error);
+   //      return [];
+   //   }
 
 };
 
