@@ -5,14 +5,27 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
 const client = new MongoClient(process.env.MONGODB_URL as string);
+
 const db = client.db("bazar-dor-project-auth");
 
 export const auth = betterAuth({
 
-    emailAndPassword: { 
-    enabled: true, 
-    autoSignIn:false,
-  }, 
+  baseURL: process.env.BETTER_AUTH_URL,
+  secret: process.env.BETTER_AUTH_SECRET,
+
+    trustedOrigins: [
+    "http://localhost:3000",
+    "https://b-14-bazar-dor-project-a07.vercel.app",
+    ],
+
+      database: mongodbAdapter(db, {
+      client,
+      }),
+
+      emailAndPassword: {
+        enabled: true,
+        autoSignIn:false,
+      },
 
     socialProviders: {
         google: { 
@@ -26,9 +39,6 @@ export const auth = betterAuth({
         }, 
     },
 
-  database: mongodbAdapter(db, {
-    client,
-  }),
 
 });
 
