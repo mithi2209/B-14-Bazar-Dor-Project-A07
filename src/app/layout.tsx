@@ -13,6 +13,7 @@ const hindSiliguri = Hind_Siliguri({
   
   weight: ["400", "500", "600", "700"],
   subsets: ["latin" , "bengali"],
+  display: "swap",
 });
 
 
