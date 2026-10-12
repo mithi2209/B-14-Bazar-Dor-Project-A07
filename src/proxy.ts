@@ -15,6 +15,8 @@ export async function proxy(request: NextRequest) {
 
   })
 
+  console.log("PROXY session:", session?.user?.email, "| has cookie:", request.headers.has("cookie"));
+
   // const session = await auth.api.getSession({
   //   headers: request.headers,
   // });
