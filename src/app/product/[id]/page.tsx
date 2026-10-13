@@ -1,11 +1,13 @@
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import AllProductsDataFetch from "@/lib/page";
 import { IProductData } from "@/app/types/product";
 import ProductDetailHeader from "@/components/product-detail/ProductDetailHeader";
 import ProductPriceSummary from "@/components/product-detail/ProductPriceSummary";
 import ProductBreadCrumb from "@/components/product-detail/ProductBreadCrumb";
 import MarketPriceTable from "@/components/product-detail/MarketPriceTable";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 
 interface IProductDetailDataProps {
@@ -16,6 +18,16 @@ interface IProductDetailDataProps {
 
 const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
   
+    // to check user
+   const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+    if (!session) {
+      redirect("/signIn");
+    }
+    // .................
+    
   const { id } = await params;
 
   const productData = await AllProductsDataFetch();

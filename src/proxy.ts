@@ -1,11 +1,10 @@
 
 
-// import { auth } from './lib/auth';
-// import { getSessionCookie } from 'better-auth/cookies';
+import { getSessionCookie } from 'better-auth/cookies';
 import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
-import { auth } from './lib/auth';
+
 
 
 
@@ -24,28 +23,37 @@ export async function proxy(request: NextRequest) {
 
 
 
+  // .....................method-3.................
+    const sessionCookie = getSessionCookie(request);
+
+      if (!sessionCookie) {
+        return NextResponse.redirect(new URL("/signIn", request.url));
+      }
+
+      return NextResponse.next();
+
 
 
   // ................method-1............
-  try {
-    const session = await auth.api.getSession({
-      headers: request.headers,
-    });
+  // try {
+  //   const session = await auth.api.getSession({
+  //     headers: request.headers,
+  //   });
 
-    if (!session?.user) {
-      return NextResponse.redirect(
-        new URL("/signIn", request.url)
-      );
-    }
+  //   if (!session?.user) {
+  //     return NextResponse.redirect(
+  //       new URL("/signIn", request.url)
+  //     );
+  //   }
 
-    return NextResponse.next();
-  } catch (error) {
-    console.error("Proxy session error:", error);
+  //   return NextResponse.next();
+  // } catch (error) {
+  //   console.error("Proxy session error:", error);
 
-    return NextResponse.redirect(
-      new URL("/signIn", request.url)
-    );
-  }
+  //   return NextResponse.redirect(
+  //     new URL("/signIn", request.url)
+  //   );
+  // }
 
 }
  
