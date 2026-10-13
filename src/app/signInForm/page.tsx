@@ -8,14 +8,17 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { authClient } from './../../lib/auth-client';
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import SignInLoadingPage from "./SignInLoadingPage";
 
 
 
 
 const SignInFormPage = () => {
 
-   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
+   const router = useRouter();
 
 
     //email sign in 
@@ -36,68 +39,107 @@ const SignInFormPage = () => {
           // const email = formData.get("email") as string;
           // const password = formData.get("password") as string;
 
-        const{ data ,error } = await authClient.signIn.email({
-          ...userData,
-        })
+          setIsLoading(true);
 
-        if(error){
-            toast.error(error.message)
-        }
-        
-        if(data){
-     
-          toast.success("Sign in successfully...");
+          try{
 
-          form.reset();
-          router.push("/")
-          router.refresh(); 
+            const{ data ,error } = await authClient.signIn.email({
+                ...userData,
+              })
 
-        }
+              if(error){
+                  toast.error(error.message)
+              }
+              
+              if(data){
+          
+                toast.success("Sign in successfully...");
+
+                form.reset();
+                router.push("/")
+                router.refresh(); 
+
+              }
+
+          }
+
+          catch {
+              toast.error("Sign in failed. Please try again.");
+          }   
+          finally {
+            setIsLoading(false);
+          }
 
        
   };
 
-    // Google sign in
-    const handleGoogleSignIn = async() =>{
+  // Google sign in
+  const handleGoogleSignIn = async() =>{
+    setIsLoading(true);
+    
+
+    try{
 
       const { data ,error} = await authClient.signIn.social({
         provider: "google",
         callbackURL: "/",
         
-    });
-
-      if(data){
-        toast.success("Google দিয়ে সাইন ইন সফল হয়েছে .")
+      });
+        if(data){
+        toast.success("Google sign in successful .")
           
       }
 
       if(error){
           
-        toast.error("Google দিয়ে সাইন ইন সফল হয়নি .");
+        toast.error("Google sign in failed!");
+         setIsLoading(false);
       }
 
+    }
+    catch {
+      toast.error("Google sign in failed.");
+      setIsLoading(false);
+    }
 
-    } 
+  } ;
     
     // github sign in
      const handleGithubSignIn = async()=>{
+      setIsLoading(true);
+
+      try{
         const { data,error } = await authClient.signIn.social({
           provider: "github",
           callbackURL: "/",
-      });
+        });
       
-      if(data){
-        toast.success("Github দিয়ে সাইন ইন সফল হয়েছে .")
+        if(data){
+          toast.success("Github sign in successful.")
+          
+        }
+
+        if(error){
+            
+          toast.error("Github sign in failed .");
+          setIsLoading(false);
+        }
+     
+      }
+      catch{
+         toast.error("GitHub sign in failed.");
+          setIsLoading(false); 
+      }
+    
         
+      
+    };
+
+      // Separate authentication loading page
+      if (isLoading) {
+        return <SignInLoadingPage />;
       }
 
-      if(error){
-          
-        toast.error("Github দিয়ে সাইন ইন সফল হয়নি .");
-      }
-     
-      
-    }
     
 
     return (
@@ -151,7 +193,10 @@ const SignInFormPage = () => {
 
             {/* Submit Button */}
             <div className="form-control mt-6">
-              <button className="btn bg-[#15803d] hover:bg-[#166534] border-none w-full text-white text-base font-medium rounded-md h-11 min-h-11 shadow-md shadow-green-200 ">
+              <button 
+              type="submit"
+              disabled={isLoading}
+              className="btn bg-[#15803d] hover:bg-[#166534] border-none w-full text-white text-base font-medium rounded-md h-11 min-h-11 shadow-md shadow-green-200 ">
                 সাইন ইন করুন
               </button>
             </div>
@@ -166,7 +211,8 @@ const SignInFormPage = () => {
           <div className="flex flex-col gap-3 ">
 
             <button 
-            
+              type="button"
+              disabled={isLoading}
               onClick={handleGoogleSignIn}
               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
               <FcGoogle className="text-red-500 text-lg" />
@@ -174,6 +220,8 @@ const SignInFormPage = () => {
             </button>
 
             <button
+              type="button"
+              disabled={isLoading}
               onClick={handleGithubSignIn}
               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
             >
@@ -199,7 +247,7 @@ const SignInFormPage = () => {
 
       {/* Footer Text */}
       <div className="mt-8 text-center">
-        <Link href="/" className="text-sm text-gray-400">
+        <Link href="/" className="text-sm lg:text-lg text-gray-400">
           ← হোম পেজে ফিরে যান
         </Link>
       </div>
