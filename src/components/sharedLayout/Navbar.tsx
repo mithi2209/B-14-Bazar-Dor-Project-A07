@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import NavLogo from "@/images/logo-icon.png";
-import NavLinks, { INavLinks } from "./NavLinks";
+
 import MarqueePage from "./Marquee";
 import CurrentDate from "./CurrentDate";
+import NavLogoImg from "@/images/navLogo2.webp"
 import { AllCategoriesData } from "@/lib/page";
+import NavLinks, { INavLinks } from "./NavLinks";
 import UserRegisterBtn from "./userRegisterBtn/UserRegisterBtn";
 
 
@@ -23,10 +24,11 @@ const Navbar = async() => {
         {/* Part-1 */}
         <div className=" flex justify-start items-center gap-2">
           <div className="bg-green-700 p-3 rounded-xl w-10 md:w-12">
+
                 <Link href="/">
                     <Image
                         className=""
-                        src={NavLogo}
+                        src={NavLogoImg}
                         alt="Logo"
                         width={50}
                         height={50}
