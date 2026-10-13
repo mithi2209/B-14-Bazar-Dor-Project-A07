@@ -19,15 +19,15 @@ interface IProductDetailDataProps {
 const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
   
     // to check user
-   const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  //  const session = await auth.api.getSession({
+  //   headers: await headers(),
+  // });
 
-    if (!session) {
-      redirect("/signIn");
-    }
+  //   if (!session) {
+  //     redirect("/signIn");
+  //   }
     // .................
-    
+
   const { id } = await params;
 
   const productData = await AllProductsDataFetch();

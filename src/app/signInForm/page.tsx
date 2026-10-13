@@ -1,0 +1,217 @@
+
+
+"use client";
+
+import Link from "next/link";
+import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import { authClient } from './../../lib/auth-client';
+import { useRouter, useSearchParams} from "next/navigation";
+
+
+
+
+const SignInFormPage = () => {
+
+   const router = useRouter();
+  const searchParams = useSearchParams();
+
+    const requestedURL = searchParams.get("callbackURL");
+
+    const callbackURL=
+    requestedURL?.startsWith("/") &&
+    !requestedURL.startsWith("//") &&
+    !requestedURL.includes("\\")
+      ? requestedURL
+      : "/";
+
+    const handleOnSubmit = async (e:React.SubmitEvent<HTMLFormElement>) => {
+
+        e.preventDefault();
+
+        const form = e.currentTarget;
+
+        const formData = new FormData(e.target);
+
+        const userData = Object.fromEntries(formData.entries()) as { email:string , password:string};
+
+        // const name = String(formData.get("name") ?? "");
+        // const email = String(formData.get("email") ?? "");
+
+
+          // const email = formData.get("email") as string;
+          // const password = formData.get("password") as string;
+
+        const{ data ,error } = await authClient.signIn.email({
+          ...userData,
+        })
+        
+        if(data){
+         
+          toast.success("Sign in successfully...");
+
+          form.reset();
+          router.replace(callbackURL);
+          router.replace("/");
+          router.refresh();
+          
+        }
+
+        if(error){
+          toast.error(error.message);
+        }
+
+  };
+
+    // Google sign in
+    const handleGoogleSignIn = async() =>{
+
+      const { data ,error} = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+        
+    });
+
+      if(data){
+        toast.success("Google দিয়ে সাইন ইন সফল হয়েছে .")
+          
+      }
+
+      if(error){
+          
+        toast.error("Google দিয়ে সাইন ইন সফল হয়নি .");
+      }
+
+
+    } 
+    
+    // github sign in
+     const handleGithubSignIn = async()=>{
+        const { data,error } = await authClient.signIn.social({
+          provider: "github",
+          callbackURL: "/",
+      });
+      
+      if(data){
+        toast.success("Github দিয়ে সাইন ইন সফল হয়েছে .")
+        
+      }
+
+      if(error){
+          
+        toast.error("Github দিয়ে সাইন ইন সফল হয়নি .");
+      }
+     
+      
+    }
+    
+
+    return (
+       <div className="min-h-screen bg-[#f3f6f4] flex flex-col items-center justify-center py-12 px-4">
+      
+      {/* --- Header Section --- */}
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+          সাইন ইন করুন
+        </h1>
+        <p className="text-gray-500 text-sm md:text-base lg:text-lg font-medium">
+          বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
+        </p>
+      </div>
+
+      {/* --- Main Card --- */}
+      <div className="card w-full max-w-110 bg-white shadow-sm border border-gray-100 rounded-2xl">
+        <div className=" p-5">
+
+          {/* Form */}
+          <form onSubmit={handleOnSubmit} className="space-y-4">
+            {/* Email Input */}
+            <div className="form-control w-full">
+              <label className="label pt-0 pb-1">
+                <span className="label-text font-semibold text-gray-700">
+                  ইমেইল
+                </span>
+              </label>
+              <input
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                className="input input-bordered font-medium w-full bg-white border-gray-300 focus:border-green-600 focus:outline-none rounded-lg text-sm h-11"
+              />
+            </div>
+
+            {/* Password Input */}
+            <div className="form-control w-full">
+              <label className="label pt-0 pb-1">
+                <span className="label-text font-semibold text-gray-700">
+                  পাসওয়ার্ড
+                </span>
+              </label>
+              <input
+                name="password"
+                type="password"
+                placeholder="কমপক্ষে ৮ অক্ষরের"
+                className="input input-bordered font-medium w-full bg-white border-gray-300 focus:border-green-600 focus:outline-none rounded-lg text-sm h-11"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="form-control mt-6">
+              <button className="btn bg-[#15803d] hover:bg-[#166534] border-none w-full text-white text-base font-medium rounded-md h-11 min-h-11 shadow-md shadow-green-200 ">
+                সাইন ইন করুন
+              </button>
+            </div>
+          </form>
+
+          {/* Divider */}
+          <div className="divider font-medium text-xs text-gray-400 my-6">
+            অথবা
+          </div>
+
+          {/* Social Buttons */}
+          <div className="flex flex-col gap-3 ">
+
+            <button 
+            
+              onClick={handleGoogleSignIn}
+              className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11">
+              <FcGoogle className="text-red-500 text-lg" />
+              <span>Google দিয়ে সাইনআপ করুন</span>
+            </button>
+
+            <button
+              onClick={handleGithubSignIn}
+              className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
+            >
+              <FaGithub className="text-black text-lg" />
+              <span>Github দিয়ে সাইনআপ করুন</span>
+            </button>
+          </div>
+
+          {/* Login Link */}
+          <div className="text-center mt-6">
+            <p className="text-sm font-medium text-gray-600">
+              অ্যাকাউন্ট নেই?{" "}
+              <Link
+                href="/signUp"
+                className="text-[#15803d] font-semibold hover:underline"
+              >
+                সাইন আপ করুন
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Text */}
+      <div className="mt-8 text-center">
+        <Link href="/" className="text-sm text-gray-400">
+          ← হোম পেজে ফিরে যান
+        </Link>
+      </div>
+    </div>
+    );
+};
+
+export default SignInFormPage;
