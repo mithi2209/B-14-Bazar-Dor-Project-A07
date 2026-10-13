@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { authClient } from './../../lib/auth-client';
-import { useRouter, useSearchParams} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 
@@ -15,17 +15,10 @@ import { useRouter, useSearchParams} from "next/navigation";
 const SignInFormPage = () => {
 
    const router = useRouter();
-  const searchParams = useSearchParams();
 
-    const requestedURL = searchParams.get("callbackURL");
 
-    const callbackURL=
-    requestedURL?.startsWith("/") &&
-    !requestedURL.startsWith("//") &&
-    !requestedURL.includes("\\")
-      ? requestedURL
-      : "/";
 
+    //email sign in 
     const handleOnSubmit = async (e:React.SubmitEvent<HTMLFormElement>) => {
 
         e.preventDefault();
@@ -46,22 +39,22 @@ const SignInFormPage = () => {
         const{ data ,error } = await authClient.signIn.email({
           ...userData,
         })
+
+        if(error){
+            toast.error(error.message)
+        }
         
         if(data){
-         
+     
           toast.success("Sign in successfully...");
 
           form.reset();
-          router.replace(callbackURL);
-          router.replace("/");
-          router.refresh();
-          
+          router.push("/")
+          router.refresh(); 
+
         }
 
-        if(error){
-          toast.error(error.message);
-        }
-
+       
   };
 
     // Google sign in

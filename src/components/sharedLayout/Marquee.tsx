@@ -26,7 +26,7 @@ const MarqueePage =  async() => {
   return (
     <div className="border-t border-[#F0F5EF] border-b-2  ">
 
-      <MarqueeText duration={15} direction="right">
+      <MarqueeText duration={11} direction="right">
 
      
 
