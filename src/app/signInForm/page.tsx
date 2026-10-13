@@ -47,9 +47,7 @@ const SignInFormPage = () => {
                 ...userData,
               })
 
-              if(error){
-                  toast.error(error.message)
-              }
+             
               
               if(data){
           
@@ -59,6 +57,10 @@ const SignInFormPage = () => {
                 router.push("/")
                 router.refresh(); 
 
+              }
+              
+               if(error){
+                  toast.error(error.message)
               }
 
           }
