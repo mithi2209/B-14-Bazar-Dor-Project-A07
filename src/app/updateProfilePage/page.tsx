@@ -47,16 +47,24 @@ const router = useRouter();
       name: string;
     };
 
-    await authClient.updateUser({
-      ...newUserData,
-      
+      const checkingName = newUserData.name.trim();
+
+        if (!checkingName) {
+        toast.error("Name cannot contain any spaces");
+        return;
+        }
+
+    const { error } = await authClient.updateUser({
+      name: checkingName,
     });
 
-    if(newUserData){
-      toast.success('Name updated successfully');
-      form.reset();
-
+    if (error) {
+      toast.error(error.message);
+      return;
     }
+
+    toast.success("Name updated successfully");
+    form.reset();
    
   };
 
@@ -166,7 +174,7 @@ const router = useRouter();
       </div>
       {/* Footer Text */}
       <div className="mt-8 text-center">
-        <Link href="/" className="text-sm lg:text-lg text-gray-400">
+        <Link href="/" className="text-sm lg:text-base text-gray-400">
           ← হোম পেজে ফিরে যান
         </Link>
       </div>
