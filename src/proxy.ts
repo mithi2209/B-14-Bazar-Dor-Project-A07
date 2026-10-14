@@ -16,16 +16,18 @@ export async function proxy(request: NextRequest) {
   if (!session?.user) {
     const signInUrl = new URL("/signIn", request.url);
 
-    // Remember the product URL the user tried to open.
+    signInUrl.searchParams.set(
+      "authSource",
+      "proxy"
+    );
+
     signInUrl.searchParams.set(
       "callbackUrl",
       request.nextUrl.pathname + request.nextUrl.search
     );
 
-    return NextResponse.redirect(signInUrl);
+      return NextResponse.redirect(signInUrl);
   }
-
-  return NextResponse.next();
     // const sessionCookie = getSessionCookie(request);
 
     // if (!sessionCookie) {
@@ -59,10 +61,10 @@ export async function proxy(request: NextRequest) {
 }
 
 
+
+
 export const config = {
   matcher: ["/product/:path*"],
   
- 
-
 
 };

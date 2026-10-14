@@ -25,10 +25,9 @@ const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
       headers: await headers(),
     });
 
-      if (!session?.user) {
-        redirect("/signIn");
+     if (!session?.user) {
+         redirect("/signIn?authSource=product-page");
       }
-
     // ............................
 
 
