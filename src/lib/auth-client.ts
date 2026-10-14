@@ -8,6 +8,10 @@ export const authClient = createAuthClient({
     // typeof window !== "undefined" && window.location.hostname === "localhost"
     //   ? "http://localhost:3000"
     //   : process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
+        baseURL:
+        typeof window !== "undefined"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
   
     
 })
