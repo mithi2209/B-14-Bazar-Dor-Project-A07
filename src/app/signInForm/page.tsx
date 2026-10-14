@@ -59,9 +59,9 @@ const SignInFormPage = () => {
               toast.success("Sign in successfully!");
 
               form.reset();
-
-              router.replace("/");
-              router.refresh();
+                router.push("/");
+              // router.replace("/");
+              // router.refresh();
          
           }
 
