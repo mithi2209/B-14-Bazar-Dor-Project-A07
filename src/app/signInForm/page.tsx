@@ -84,11 +84,12 @@ const SignInFormPage = () => {
 
       const { data ,error} = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/",
+        
         
       });
         if(data){
         toast.success("Google sign in successful .")
+        router.push("/")
           
       }
 
@@ -113,11 +114,12 @@ const SignInFormPage = () => {
       try{
         const { data,error } = await authClient.signIn.social({
           provider: "github",
-          callbackURL: "/",
+          // callbackURL: "/",
         });
       
         if(data){
           toast.success("Github sign in successful.")
+          router.push("/")
           
         }
 
