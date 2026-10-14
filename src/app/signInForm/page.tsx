@@ -78,26 +78,20 @@ const SignInFormPage = () => {
   // Google sign in
   const handleGoogleSignIn = async() =>{
     setIsLoading(true);
-    
-
     try{
 
-      const { data ,error} = await authClient.signIn.social({
+      const { error} = await authClient.signIn.social({
         provider: "google",
+        callbackURL: "/",
         
         
       });
-        if(data){
-        toast.success("Google sign in successful .")
-        router.push("/")
-          
-      }
-
-      if(error){
-          
-        toast.error("Google sign in failed!");
-         setIsLoading(false);
-      }
+       
+        if(error){
+            
+          toast.error("Google sign in failed!");
+          setIsLoading(false);
+        }
 
     }
     catch {
@@ -112,23 +106,17 @@ const SignInFormPage = () => {
       setIsLoading(true);
 
       try{
-        const { data,error } = await authClient.signIn.social({
+        const { error } = await authClient.signIn.social({
           provider: "github",
-          // callbackURL: "/",
+          callbackURL: "/",
         });
       
-        if(data){
-          toast.success("Github sign in successful.")
-          router.push("/")
-          
-        }
-
-        if(error){
-            
-          toast.error("Github sign in failed .");
-          setIsLoading(false);
-        }
-     
+          if(error){
+              
+            toast.error("Github sign in failed .");
+            setIsLoading(false);
+          }
+      
       }
       catch{
          toast.error("GitHub sign in failed.");
