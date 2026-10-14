@@ -136,7 +136,7 @@ const ProfilePage = () => {
 
                 <li>
                   <Link
-                    href="/updateProfilePage"
+                    href="/myProfilePage"
                     className="text-sm lg:text-base font-medium "
                   >
                     <BsPersonFill className="text-slate-500" /> আমার প্রোফাইল

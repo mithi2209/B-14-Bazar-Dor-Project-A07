@@ -249,7 +249,7 @@ const SignUpFormPage = () => {
 
       {/* Footer Text */}
       <div className="mt-8 text-center">
-        <Link href="/" className="text-sm lg:text-base text-gray-400">
+        <Link href="/" className="text-sm lg:text-base font-semibold text-gray-400">
           ← হোম পেজে ফিরে যান
         </Link>
       </div>

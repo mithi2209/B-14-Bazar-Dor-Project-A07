@@ -32,9 +32,11 @@ const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
     });
 
     if (!session?.user) {
-      redirect(`/signIn?callbackUrl=${encodeURIComponent(`/product/${id}`)}`);
+      redirect(
+        `/signIn?callbackUrl=${encodeURIComponent(`/product/${id}`)}&signInRequired=true`
+      );
     }
-  // --------------
+  // ---------------------------
 
   const productData = await AllProductsDataFetch();
 
