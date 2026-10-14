@@ -3,20 +3,18 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "./lib/auth";
+
 
 
 export async function proxy(request: NextRequest) {
 
-// Better Auth stores the session token in cookies under names like this:
-  // "better-auth.session_token" (or "__Secure-better-auth.session_token" in production)
   const sessionToken =
     request.cookies.get("better-auth.session_token")?.value ||
     request.cookies.get("__Secure-better-auth.session_token")?.value;
 
   if (!sessionToken) {
     const signInUrl = new URL("/signIn", request.url);
-    // Optional: preserve where the user was trying to go
+    
     signInUrl.searchParams.set(
       "callbackUrl",
       request.nextUrl.pathname + request.nextUrl.search
@@ -25,6 +23,7 @@ export async function proxy(request: NextRequest) {
   }
 
   return NextResponse.next();
+  
     // const sessionCookie = getSessionCookie(request);
 
     // if (!sessionCookie) {
