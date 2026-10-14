@@ -27,17 +27,13 @@ const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
   const { id } = await params;
   
    // to check user
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-  if (!session?.user) {
-    const signInUrl = `/signIn?callbackUrl=${encodeURIComponent(
-      `/product/${id}`
-    )}`;
-
-    redirect(signInUrl);
-  }
+    if (!session?.user) {
+      redirect(`/signIn?callbackUrl=${encodeURIComponent(`/product/${id}`)}`);
+    }
   // --------------
 
   const productData = await AllProductsDataFetch();

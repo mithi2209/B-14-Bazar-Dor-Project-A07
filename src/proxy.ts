@@ -8,22 +8,7 @@ import { getSessionCookie } from "better-auth/cookies";
 
 export async function proxy(request: NextRequest) {
 
- const sessionCookie =
-    request.cookies.get("__Secure-better-auth.session_token")?.value ||
-    request.cookies.get("better-auth.session_token")?.value;
-
-  if (!sessionCookie) {
-    const signInUrl = new URL("/signIn", request.url);
-
-    signInUrl.searchParams.set(
-      "callbackUrl",
-      request.nextUrl.pathname + request.nextUrl.search
-    );
-
-    return NextResponse.redirect(signInUrl);
-  }
-
-  return NextResponse.next();
+    return NextResponse.next();
 
   // -----------------------------
 
