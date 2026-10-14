@@ -3,17 +3,35 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
+import { auth } from "./lib/auth";
 
 
 export async function proxy(request: NextRequest) {
 
-    const sessionCookie = getSessionCookie(request);
 
-    if (!sessionCookie) {
-      return NextResponse.redirect(new URL("/signIn", request.url));
-    }
-    return NextResponse.next();
+   const session = await auth.api.getSession({
+    headers: request.headers,
+  });
+
+  if (!session?.user) {
+    const signInUrl = new URL("/signIn", request.url);
+
+    // Remember the product URL the user tried to open.
+    signInUrl.searchParams.set(
+      "callbackUrl",
+      request.nextUrl.pathname + request.nextUrl.search
+    );
+
+    return NextResponse.redirect(signInUrl);
+  }
+
+  return NextResponse.next();
+    // const sessionCookie = getSessionCookie(request);
+
+    // if (!sessionCookie) {
+    //   return NextResponse.redirect(new URL("/signIn", request.url));
+    // }
+    // return NextResponse.next();
 
 
   //  try {

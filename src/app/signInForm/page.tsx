@@ -47,22 +47,22 @@ const SignInFormPage = () => {
                 ...userData,
               })
 
-             
-              
-              if(data){
-          
-                toast.success("Sign in successfully...");
-
-                form.reset();
-                router.push("/")
-                router.refresh(); 
-
-              }
-
-               if(error){
+              if(error){
                   toast.error(error.message)
               }
 
+              
+               if (!data) {
+                toast.error("Sign in failed. Please try again.");
+                return;
+              }
+              toast.success("Sign in successfully!");
+
+              form.reset();
+
+              router.replace("/");
+              router.refresh();
+         
           }
 
           catch {

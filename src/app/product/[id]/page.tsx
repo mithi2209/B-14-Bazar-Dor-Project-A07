@@ -21,12 +21,14 @@ interface IProductDetailDataProps {
 const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
   
     // to check user
-    const session = await auth.api.getSession({ headers: await headers() });
-  
-    if (!session) {
-      redirect("/signIn");
-    }
-    
+     const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+      if (!session?.user) {
+        redirect("/signIn");
+      }
+
     // ............................
 
 
