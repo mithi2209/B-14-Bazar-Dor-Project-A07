@@ -8,18 +8,39 @@ import type { NextRequest } from "next/server";
 
 export async function proxy(request: NextRequest) {
 
+
+   try {
+    const session = await auth.api.getSession({
+      headers: request.headers, 
+    });
+
+    if (!session?.user) {
+      const signInUrl = new URL("/signIn", request.url);
+      signInUrl.searchParams.set(
+        "callbackUrl",
+        request.nextUrl.pathname + request.nextUrl.search
+      );
+      return NextResponse.redirect(signInUrl);
+    }
+
+    return NextResponse.next();
+  }
+   catch (error) {
+    console.error("PROXY AUTH ERROR:", error);
+    return NextResponse.redirect(new URL("/signIn", request.url));
+  }
   // .........method-1..........
 
-    const session = await auth.api.getSession({
-    headers: await headers()
+  //   const session = await auth.api.getSession({
+  //   headers: await headers()
 
-  });
+  // });
 
-    const user = session?.user
+  //   const user = session?.user
 
-      if(!user){
-        return NextResponse.redirect(new URL('/signIn', request.url))
-      }
+  //     if(!user){
+  //       return NextResponse.redirect(new URL('/signIn', request.url))
+  //     }
 
 
   // ..........method-2.............

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { authClient } from './../../lib/auth-client';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import SignInLoadingPage from "./SignInLoadingPage";
 
@@ -19,6 +19,9 @@ const SignInFormPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
    const router = useRouter();
+   const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
+    const safeUrl = callbackUrl.startsWith("/") && !callbackUrl.startsWith("//") ? callbackUrl : "/";
 
 
     //email sign in 
@@ -54,11 +57,11 @@ const SignInFormPage = () => {
                 toast.success("Sign in successfully...");
 
                 form.reset();
-                router.push("/")
+                router.push(safeUrl)
                 router.refresh(); 
 
               }
-              
+
                if(error){
                   toast.error(error.message)
               }
