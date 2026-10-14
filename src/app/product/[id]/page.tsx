@@ -1,11 +1,13 @@
 
 import AllProductsDataFetch from "@/lib/page";
 import { IProductData } from "@/app/types/product";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import ProductDetailHeader from "@/components/product-detail/ProductDetailHeader";
 import ProductPriceSummary from "@/components/product-detail/ProductPriceSummary";
 import ProductBreadCrumb from "@/components/product-detail/ProductBreadCrumb";
 import MarketPriceTable from "@/components/product-detail/MarketPriceTable";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 
 
@@ -18,18 +20,25 @@ interface IProductDetailDataProps {
 
 const ProductDetailPage = async ({ params }: IProductDetailDataProps) => {
   
-    // to check user
-    //  const session = await auth.api.getSession({
-    //   headers: await headers(),
-    // });
-
-    //  if (!session?.user) {
-    //      redirect("/signIn?authSource=product-page");
-    //   }
-    // ............................
+   
+  
 
 
   const { id } = await params;
+  
+   // to check user
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) {
+    const signInUrl = `/signIn?callbackUrl=${encodeURIComponent(
+      `/product/${id}`
+    )}`;
+
+    redirect(signInUrl);
+  }
+  // --------------
 
   const productData = await AllProductsDataFetch();
 
