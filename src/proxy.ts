@@ -1,67 +1,42 @@
 
 
-import { headers } from "next/headers";
-import { auth } from "./lib/auth";
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 
 
 export async function proxy(request: NextRequest) {
 
+    const sessionCookie = getSessionCookie(request);
 
-   try {
-    const session = await auth.api.getSession({
-      headers: request.headers, 
-    });
-
-    if (!session?.user) {
-      const signInUrl = new URL("/signIn", request.url);
-      signInUrl.searchParams.set(
-        "callbackUrl",
-        request.nextUrl.pathname + request.nextUrl.search
-      );
-      return NextResponse.redirect(signInUrl);
+    if (!sessionCookie) {
+      return NextResponse.redirect(new URL("/signIn", request.url));
     }
-
     return NextResponse.next();
-  }
-   catch (error) {
-    console.error("PROXY AUTH ERROR:", error);
-    return NextResponse.redirect(new URL("/signIn", request.url));
-  }
-  // .........method-1..........
 
+
+  //  try {
   //   const session = await auth.api.getSession({
-  //   headers: await headers()
-
-  // });
-
-  //   const user = session?.user
-
-  //     if(!user){
-  //       return NextResponse.redirect(new URL('/signIn', request.url))
-  //     }
-
-
-  // ..........method-2.............
-
-  // try {
-  //   const session = await auth.api.getSession({
-  //     headers: request.headers,
+  //     headers: request.headers, 
   //   });
 
-  //   console.log("PROXY:", session?.user?.email ?? "no session");
-
   //   if (!session?.user) {
-  //     return NextResponse.redirect(new URL("/signIn", request.url));
+  //     const signInUrl = new URL("/signIn", request.url);
+  //     signInUrl.searchParams.set(
+  //       "callbackUrl",
+  //       request.nextUrl.pathname + request.nextUrl.search
+  //     );
+  //     return NextResponse.redirect(signInUrl);
   //   }
 
   //   return NextResponse.next();
-  // } 
-  // catch (error) {
-  //   console.error("PROXY ERROR:", error);
+  // }
+  //  catch (error) {
+  //   console.error("PROXY AUTH ERROR:", error);
   //   return NextResponse.redirect(new URL("/signIn", request.url));
   // }
+  
 
 }
 
