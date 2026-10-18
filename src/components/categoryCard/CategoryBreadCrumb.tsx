@@ -24,14 +24,9 @@ const CategoryBreadCrumb = ({category}:CategoryProps) => {
             <FaChevronRight className="text-[10px] text-green-700" />
 
            <span   
-            className="hover:text-green-700">
-                {formatBanglaWords(category.slug)}
-                
+                className="text-green-700">{formatBanglaWords(category.slug)}
             </span>
 
-            <FaChevronRight className="text-[10px] text-green-700" />
-
-            <span  className="text-green-700">{category.nameBn}</span>
           </div>
 
     );

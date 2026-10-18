@@ -39,7 +39,7 @@ const MarqueePage =  async() => {
               key={headlines.id}
               href={`/product/${headlines.id}`}>
             
-              <ul className=" flex items-center mx-2 border-r-2 border-[#F0F5EF] py-2">
+              <ul className=" flex items-center mx-2 border-r-2 border-[#F0F5EF] py-2 hover:link hover:text-green-700">
                 <li>
                   {headlines.categoryIcon}
                   <span className="mx-2 font-semibold text-sm lg:text-base">

@@ -7,11 +7,10 @@ import { FaGithub } from "react-icons/fa";
 import { authClient } from "./../../lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import SignInLoadingPage from "./SignInLoadingPage";
 import SignInRequiredToast from "./SignInRequiredToast";
 
 const SignInFormPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSigning, setIsSigning] = useState(false);
 
   const router = useRouter();
 
@@ -35,8 +34,8 @@ const SignInFormPage = () => {
     // const email = formData.get("email") as string;
     // const password = formData.get("password") as string;
 
-    setIsLoading(true);
-
+    
+    setIsSigning(true);
     try {
       const { data, error } = await authClient.signIn.email({
         ...userData,
@@ -56,16 +55,18 @@ const SignInFormPage = () => {
       router.push("/");
       // router.replace("/");
       // router.refresh();
-    } catch {
+    } 
+    catch {
       toast.error("Sign in failed. Please try again.");
-    } finally {
-      setIsLoading(false);
+    }
+     finally {
+      setIsSigning(false);
     }
   };
 
   // Google sign in
   const handleGoogleSignIn = async () => {
-    setIsLoading(true);
+    setIsSigning(true);
     try {
       const { error } = await authClient.signIn.social({
         provider: "google",
@@ -74,17 +75,17 @@ const SignInFormPage = () => {
 
       if (error) {
         toast.error("Google sign in failed!");
-        setIsLoading(false);
+        setIsSigning(false);
       }
     } catch {
       toast.error("Google sign in failed.");
-      setIsLoading(false);
+      setIsSigning(false);
     }
   };
 
   // github sign in
   const handleGithubSignIn = async () => {
-    setIsLoading(true);
+    setIsSigning(true);
 
     try {
       const { error } = await authClient.signIn.social({
@@ -94,18 +95,16 @@ const SignInFormPage = () => {
 
       if (error) {
         toast.error("Github sign in failed .");
-        setIsLoading(false);
+        setIsSigning(false);
       }
     } catch {
       toast.error("GitHub sign in failed.");
-      setIsLoading(false);
+      setIsSigning(false);
     }
   };
 
   // Separate authentication loading page
-  if (isLoading) {
-    return <SignInLoadingPage />;
-  }
+
 
   return (
     <>
@@ -164,10 +163,19 @@ const SignInFormPage = () => {
               <div className="form-control mt-6">
                 <button
                   type="submit"
-                  disabled={isLoading}
-                  className="btn bg-[#15803d] hover:bg-[#166534] border-none w-full text-white text-base font-medium rounded-md h-11 min-h-11 shadow-md shadow-green-200 "
+                  disabled={isSigning}
+                  className="flex items-center justify-center gap-2 btn bg-[#15803d] hover:bg-[#166534] border-none w-full text-white text-base font-medium rounded-md h-11 min-h-11 shadow-md shadow-green-200 "
                 >
-                  সাইন ইন করুন
+                {
+                  isSigning &&(
+                    <span className="loading loading-dots loading-xs"></span>
+                  )
+                }
+
+                {
+                  isSigning? "সাইন ইন করা হচ্ছে..." : "সাইন ইন করুন"
+                }
+                  
                 </button>
               </div>
             </form>
@@ -181,7 +189,7 @@ const SignInFormPage = () => {
             <div className="flex flex-col gap-3 ">
               <button
                 type="button"
-                disabled={isLoading}
+                disabled={isSigning}
                 onClick={handleGoogleSignIn}
                 className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
               >
@@ -191,7 +199,7 @@ const SignInFormPage = () => {
 
               <button
                 type="button"
-                disabled={isLoading}
+                disabled={isSigning}
                 onClick={handleGithubSignIn}
                 className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
               >

@@ -7,10 +7,9 @@ import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { authClient } from "./../../lib/auth-client";
 import { useState } from "react";
-import SignUpLoadingPage from "./SignUpLoadingPage";
 
 const SignUpFormPage = () => { 
-  const [isLoading, setIsLoading] = useState(false);
+ const [isSigning, setIsSigning] = useState(false);
 
   const router = useRouter();
 
@@ -32,7 +31,7 @@ const SignUpFormPage = () => {
     }
 
     
-    setIsLoading(true);
+    setIsSigning(true);
 
     try{
 
@@ -58,7 +57,7 @@ const SignUpFormPage = () => {
       toast.error("Sign up failed. Please try again.");
     }   
       finally {
-        setIsLoading(false);
+        setIsSigning(false);
       }
 
    
@@ -66,7 +65,7 @@ const SignUpFormPage = () => {
 
   // Google sign in
   const handleGoogleSignIn = async () => {
-    setIsLoading(true);
+    setIsSigning(true);
     try{
 
       const {  error } = await authClient.signIn.social({
@@ -76,20 +75,20 @@ const SignUpFormPage = () => {
 
         if (error) {
           toast.error("Google sign in failed ! ");
-          setIsLoading(false);
+          setIsSigning(false);
         }
 
     }  
     catch {
       toast.error("Google sign up failed !");
-      setIsLoading(false);
+      setIsSigning(false);
     }
     
   };
 
   // github sign in
   const handleGithubSignIn = async () => {
-    setIsLoading(true);
+    setIsSigning(true);
     try{
       const { error } = await authClient.signIn.social({
         provider: "github",
@@ -99,20 +98,16 @@ const SignUpFormPage = () => {
         if(error){
             
           toast.error("Github sign in failed .");
-          setIsLoading(false);
+          setIsSigning(false);
         }
      
       }
     catch{
       toast.error("GitHub sign in failed.");
-      setIsLoading(false); 
+      setIsSigning(false); 
     }
   };
 
-  // Separate authentication loading page
-    if (isLoading) {
-      return <SignUpLoadingPage />;
-    }
 
 
   return (
@@ -196,10 +191,19 @@ const SignUpFormPage = () => {
             <div className="form-control mt-6">
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isSigning}
                 className="btn bg-[#15803d] hover:bg-[#166534] border-none w-full text-white text-base font-medium rounded-md h-11 min-h-11 shadow-md shadow-green-200 "
               >
-                অ্যাকাউন্ট তৈরি করুন
+             
+                 {
+                  isSigning &&(
+                    <span className="loading loading-dots loading-xs"></span>
+                  )
+                }
+
+                {
+                  isSigning? "অ্যাকাউন্ট তৈরি হচ্ছে..." : "অ্যাকাউন্ট তৈরি করুন"
+                }
               </button>
             </div>
           </form>
@@ -213,7 +217,7 @@ const SignUpFormPage = () => {
           <div className="flex flex-col gap-3 ">
             <button
               type="button"
-              disabled={isLoading}
+              disabled={isSigning}
               onClick={handleGoogleSignIn}
               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
             >
@@ -223,7 +227,7 @@ const SignUpFormPage = () => {
 
             <button
               type="button"
-              disabled={isLoading}
+              disabled={isSigning}
               onClick={handleGithubSignIn}
               className="btn btn-outline flex-1 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 normal-case font-semibold text-sm rounded-lg min-h-11"
             >
